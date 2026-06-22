@@ -1,0 +1,17 @@
+{
+  "name": "Para la QFB mas guapa",
+  "short_name": "QFB Orgánica",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#0f2b3d",
+  "theme_color": "#0f2b3d",
+  "description": "Práctica interactiva de química orgánica.",
+  "icons": [
+    {
+      "src": "assets/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
