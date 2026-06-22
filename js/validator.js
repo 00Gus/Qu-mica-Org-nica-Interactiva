@@ -31,7 +31,8 @@ const Validator = (() => {
     const mol = parseSmiles(smiles);
     if (!mol) return null;
     try {
-      return mol.getMolecularFormula();
+      const mf = mol.getMolecularFormula();
+      return mf ? (mf.formula || mf.toString()) : null;
     } catch {
       return null;
     }
@@ -134,9 +135,13 @@ const Validator = (() => {
     const userCanon = canonicalize(userSmiles) || '';
     const correctCanon = canonicalize(correctSmiles) || '';
 
-    const hasAromatic5N = s => /\[nH\]|n\d|n\(/.test(s) || /c1c[nH]/.test(s);
+    const hasAromatic5N = s => /\[nH\]|n\d|n\(/.test(s) || /c1c\[nH\]/.test(s);
     const hasAromatic5O = s => /c1ccoc1|o1cccc1/.test(s);
     const hasAromatic5S = s => /c1ccsc1|s1cccc1/.test(s);
+
+    if (userCanon.includes('=C=')) {
+      hints.push('Has juntado dos enlaces dobles en la misma esquina (creando un carbono =C=). ¡Sepáralos!');
+    }
     const hasBenzene = s => /c1ccccc1/.test(s);
     const hasPyridine = s => /c1ccncc1|n1ccccc1/.test(s);
     const hasNitro = s => /\[N\+\]\(=O\)\[O-\]|N\(=O\)=O/.test(s);
@@ -210,6 +215,17 @@ const Validator = (() => {
   }
 
   function validate(userSmiles, problem) {
+    if (typeof OCL === 'undefined' || !OCL.Molecule) {
+      return {
+        correct: false,
+        score: 0,
+        title: 'Error de validación',
+        message: 'El motor químico (OpenChemLib) no está cargado. Recarga la página con <strong>Ctrl+F5</strong> para forzar la actualización.',
+        explanation: problem.explanation,
+        issues: ['Si el problema persiste, comprueba tu conexión a internet o abre la app en una ventana de incógnito.']
+      };
+    }
+
     if (!userSmiles || !userSmiles.trim()) {
       return {
         correct: false,

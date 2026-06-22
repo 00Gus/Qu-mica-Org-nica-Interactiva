@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 450" width="100%" height="100%" style="background:#ffffff; border-radius:8px;">
+  <!-- Título -->
+  <text x="300" y="40" font-family="Arial" font-size="22" font-weight="bold" text-anchor="middle" fill="#333">2-Nitrotiofeno (Nitración del tiofeno)</text>
+
+  <!-- Leyenda y Pasos -->
+  <rect x="20" y="70" width="220" height="200" fill="#f8fafc" stroke="#cbd5e1" rx="8"/>
+  <text x="30" y="95" font-family="Arial" font-size="14" font-weight="bold" fill="#0f172a">Pasos:</text>
+  <text x="30" y="120" font-family="Arial" font-size="12" fill="#334155">1. Dibuja el Tiofeno (S abajo der.)</text>
+  <text x="30" y="145" font-family="Arial" font-size="12" fill="#334155">2. Elige Enlace Sencillo y haz clic</text>
+  <text x="30" y="160" font-family="Arial" font-size="12" fill="#334155">   en la esquina inferior izq.</text>
+  <text x="30" y="185" font-family="Arial" font-size="12" fill="#334155">3. Elige 'N' y toca la nueva punta</text>
+  <text x="30" y="210" font-family="Arial" font-size="12" fill="#334155">4. Saca 2 enlaces desde la N</text>
+  <text x="30" y="235" font-family="Arial" font-size="12" fill="#334155">5. Ponles 'O' a ambas puntas</text>
+  <text x="30" y="260" font-family="Arial" font-size="12" fill="#334155">6. Haz doble uno de los enlaces N-O</text>
+
+  <!-- Centro del pentágono en (380, 180) -->
+  <!-- Top: 380, 80 -->
+  <!-- Left: 266, 163 -->
+  <!-- Bottom-Left: 309, 297 -->
+  <!-- Bottom-Right (S): 451, 297 -->
+  <!-- Right: 494, 163 -->
+
+  <!-- Single bonds (Black, thick) -->
+  <line x1="380" y1="80" x2="266" y2="163" stroke="#000" stroke-width="4"/> <!-- Top to Left -->
+  <line x1="266" y1="163" x2="309" y2="297" stroke="#000" stroke-width="4"/> <!-- Left to Bottom-Left -->
+  <line x1="309" y1="297" x2="410" y2="297" stroke="#000" stroke-width="4"/> <!-- Bottom-Left to S -->
+  <line x1="494" y1="163" x2="465" y2="252" stroke="#000" stroke-width="4"/> <!-- Right to S -->
+  <line x1="494" y1="163" x2="380" y2="80" stroke="#000" stroke-width="4"/> <!-- Right to Top -->
+
+  <!-- Double bond inner lines -->
+  <line x1="283" y1="172" x2="321" y2="288" stroke="#000" stroke-width="4"/> 
+  <line x1="474" y1="168" x2="383" y2="102" stroke="#000" stroke-width="4"/>
+
+  <!-- Sulfur Atom -->
+  <text x="451" y="310" font-family="Arial" font-size="40" font-weight="bold" text-anchor="middle" fill="#ca8a04">S</text>
+
+  <!-- Nitro Group -->
+  <!-- Bond from Bottom-Left (309, 297) to N (240, 350) -->
+  <line x1="309" y1="297" x2="255" y2="335" stroke="#2563eb" stroke-width="4"/>
+  
+  <!-- N Atom -->
+  <text x="240" y="360" font-family="Arial" font-size="30" font-weight="bold" text-anchor="middle" fill="#2563eb">N</text>
+  <text x="260" y="340" font-family="Arial" font-size="20" font-weight="bold" text-anchor="middle" fill="#2563eb">+</text>
+
+  <!-- Bond N to O double (up-left) -->
+  <!-- N is at 240,350 roughly. O1 is at 170, 300 -->
+  <line x1="225" y1="335" x2="185" y2="305" stroke="#2563eb" stroke-width="4"/>
+  <line x1="235" y1="322" x2="195" y2="292" stroke="#2563eb" stroke-width="4"/>
+  <text x="165" y="305" font-family="Arial" font-size="30" font-weight="bold" text-anchor="middle" fill="#dc2626">O</text>
+
+  <!-- Bond N to O single (down-left) -->
+  <!-- N is at 240,350. O2 is at 160, 400 -->
+  <line x1="220" y1="365" x2="180" y2="385" stroke="#2563eb" stroke-width="4"/>
+  <text x="160" y="405" font-family="Arial" font-size="30" font-weight="bold" text-anchor="middle" fill="#dc2626">O</text>
+  <text x="180" y="385" font-family="Arial" font-size="20" font-weight="bold" text-anchor="middle" fill="#dc2626">-</text>
+
+  <!-- Highlights -->
+  <circle cx="309" cy="297" r="15" fill="none" stroke="#16a34a" stroke-width="3" stroke-dasharray="5,5"/>
+  <text x="375" y="325" font-family="Arial" font-size="14" font-weight="bold" text-anchor="middle" fill="#16a34a">Posición 2 (alfa)</text>
+
+</svg>

@@ -309,11 +309,11 @@
 
   function showFeedback(result, problem, attemptNum) {
     const panel = $('feedbackPanel');
-    panel.classList.remove('hidden', 'correct', 'incorrect', 'partial');
-    panel.classList.add(result.correct ? 'correct' : 'incorrect');
+    panel.classList.remove('hidden', 'correct', 'incorrect', 'partial', 'revealed');
+    panel.classList.add(result.revealed ? 'revealed' : (result.correct ? 'correct' : 'incorrect'));
 
     const icon = $('feedbackIcon');
-    icon.textContent = result.correct ? '✓' : '✗';
+    icon.textContent = result.revealed ? 'ℹ' : (result.correct ? '✓' : '✗');
 
     $('feedbackTitle').textContent = result.title;
 
@@ -393,9 +393,10 @@
     
     showFeedback({
       correct: false,
+      revealed: true,
       score: 0,
       title: 'Respuesta revelada',
-      message: 'Se ha cargado la respuesta esperada en el lienzo. Analízala bien.',
+      message: 'Se ha cargado la respuesta esperada en el lienzo. Estúdiala para el próximo intento.',
       explanation: problem.explanation,
       issues: []
     }, problem, getProblemAttempts(problem.id));
@@ -525,12 +526,50 @@
     updateStats();
     bindEvents();
     
-    // Registrar Service Worker para PWA
+    // Registrar Service Worker para PWA y manejar actualizaciones (Caché iOS)
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
-        navigator.serviceWorker.register('./sw.js')
-          .then(registration => console.log('ServiceWorker registrado:', registration.scope))
-          .catch(error => console.log('Error en ServiceWorker:', error));
+        let refreshing = false;
+        
+        // Cuando el nuevo SW toma control, recarga la página automáticamente
+        navigator.serviceWorker.addEventListener('controllerchange', () => {
+          if (!refreshing) {
+            refreshing = true;
+            window.location.reload();
+          }
+        });
+
+        navigator.serviceWorker.register('./sw.js').then(reg => {
+          console.log('ServiceWorker registrado:', reg.scope);
+          
+          function showUpdateBanner(worker) {
+            const banner = document.getElementById('updateBanner');
+            const btn = document.getElementById('updateBtn');
+            if (banner && btn) {
+              banner.classList.remove('hidden');
+              btn.onclick = () => {
+                banner.classList.add('hidden');
+                worker.postMessage({ action: 'SKIP_WAITING' });
+              };
+            }
+          }
+
+          // ¿Ya hay un SW esperando? (Si recargó y no actualizó antes)
+          if (reg.waiting) {
+            showUpdateBanner(reg.waiting);
+          }
+
+          // Escuchar cuando el SW encuentra una actualización
+          reg.addEventListener('updatefound', () => {
+            const newWorker = reg.installing;
+            newWorker.addEventListener('statechange', () => {
+              // Si ya se instaló y está esperando para tomar control...
+              if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                showUpdateBanner(newWorker);
+              }
+            });
+          });
+        }).catch(error => console.log('Error en ServiceWorker:', error));
       });
     }
   }

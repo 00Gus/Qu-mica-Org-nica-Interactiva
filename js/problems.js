@@ -80,7 +80,7 @@ const PROBLEMS = [
       { smiles: 'c1ccccc1', reason: 'Dibujaste solo benceno. El fenol necesita un grupo <strong>hidróxilo (-OH)</strong> unido al anillo aromático.' },
       { smiles: 'CC(=O)O', reason: 'Dibujaste ácido acético. El fenol tiene un anillo bencénico con -OH, no un grupo carboxilo en una cadena.' },
       { smiles: 'C1CCOC1', reason: 'Dibujaste tetrahidrofurano (THF). El fenol es un compuesto aromático de seis miembros con -OH.' },
-      { smiles: 'c1ccoc1', reason: 'Dibujaste furano. El fenol es un anillo bencénico (6 carbonos), no un heterociclo de 5 miembros.' }
+      { smiles: 'C1=COC=C1', reason: 'Dibujaste furano. El fenol es un anillo bencénico (6 carbonos), no un heterociclo de 5 miembros.' }
     ],
     explanation: 'El fenol (C₆H₅OH) consiste en un anillo bencénico con un grupo hidroxilo en posición 1. La conjugación del par de electrones del oxígeno con el anillo le confiere propiedades ácidas débiles.',
     hints: ['Es un hexágono aromático con un grupo -OH.', 'No confundir con el alcohol alifático: el OH está sobre el anillo.']
@@ -288,10 +288,10 @@ const PROBLEMS = [
     title: 'Pirrol',
     prompt: 'Dibuja la estructura del <strong>pirrol</strong>.',
     context: 'Heterociclo aromático de 5 miembros con un nitrógeno. Base de porfirinas y hemoglobina.',
-    smiles: 'c1cc[nH]c1',
-    acceptedSmiles: ['c1c[nH]cc1', 'n1cccc1'],
+    smiles: 'C1=CNC=C1',
+    acceptedSmiles: ['c1cc[nH]c1', 'c1c[nH]cc1', 'n1cccc1'],
     commonMistakes: [
-      { smiles: 'c1ccncc1', reason: 'Dibujaste piridina (6 miembros). El pirrol es un anillo de 5 miembros.' },
+      { smiles: 'C1=CC=NC=C1', reason: 'Dibujaste piridina (6 miembros). El pirrol es un anillo de 5 miembros.' },
       { smiles: 'c1ccoc1', reason: 'Dibujaste furano. El pirrol tiene nitrógeno, no oxígeno.' }
     ],
     explanation: 'Anillo de 5 miembros con un N y dos dobles enlaces. El N lleva un H (pirrol, no pirrolato).',
@@ -304,8 +304,8 @@ const PROBLEMS = [
     title: 'Nitración del pirrol',
     prompt: 'Dibuja el producto principal de la <strong>nitración del pirrol</strong> con <span class="reagent">AcONO₂ / Ac₂O, 5°C</span>.',
     context: 'La sustitución electrofílica en pirrol ocurre preferentemente en C2 (posición α al nitrógeno).',
-    smiles: 'c1cc([nH])c([N+](=O)[O-])c1',
-    acceptedSmiles: ['c1c([N+](=O)[O-])c[nH]c1', 'O=[N+]([O-])c1cc[nH]c1'],
+    smiles: 'O=[N+]([O-])C1=CC=C[NH]1',
+    acceptedSmiles: ['c1cc([nH])c([N+](=O)[O-])c1', 'c1c([N+](=O)[O-])c[nH]c1', 'O=[N+]([O-])c1cc[nH]c1'],
     commonMistakes: [
       { smiles: 'c1cc([nH])cc1[N+](=O)[O-]', reason: 'Nitraste en C3 (posición β). La nitración del pirrol ocurre preferentemente en C2 (α).' },
       { smiles: 'c1cc[nH]c1', reason: 'Dibujaste pirrol sin sustituir. Debe añadirse un grupo -NO₂.' }
@@ -320,8 +320,8 @@ const PROBLEMS = [
     title: 'Sulfonación del pirrol',
     prompt: 'Dibuja el producto de la <strong>sulfonación del pirrol</strong> con <span class="reagent">SO₃ / Piridina</span>.',
     context: 'La sulfonación introduce -SO₃H en posición 2.',
-    smiles: 'c1cc([nH])c(S(=O)(=O)O)c1',
-    acceptedSmiles: ['O=S(=O)(O)c1cc[nH]c1'],
+    smiles: 'O=S(C1=CC=C[NH]1)(O)=O',
+    acceptedSmiles: ['c1cc([nH])c(S(=O)(=O)O)c1', 'O=S(=O)(O)c1cc[nH]c1'],
     commonMistakes: [
       { smiles: 'c1cc[nH]c1', reason: 'Dibujaste pirrol sin reaccionar. Debe añadirse -SO₃H.' }
     ],
@@ -335,8 +335,8 @@ const PROBLEMS = [
     title: 'Acilación del pirrol',
     prompt: 'Dibuja el producto de la <strong>acilación del pirrol</strong> con <span class="reagent">Ac₂O, 250°C</span>.',
     context: 'Se forma 2-acetilpirrol.',
-    smiles: 'CC(=O)c1cc[nH]c1',
-    acceptedSmiles: ['CC(=O)c1ccc[nH]1'],
+    smiles: 'CC(=O)C1=CC=C[NH]1',
+    acceptedSmiles: ['CC(=O)c1cc[nH]c1', 'CC(=O)c1ccc[nH]1'],
     commonMistakes: [
       { smiles: 'CC(=O)c1cc[nH]c1C(C)=O', reason: 'Polisustitución. La monoacetilación ocurre en C2.' }
     ],
@@ -350,8 +350,8 @@ const PROBLEMS = [
     title: 'Síntesis de Paal-Knorr (pirrol)',
     prompt: 'Dibuja el producto de la <strong>síntesis de Paal-Knorr</strong>: 2,5-hexanodiona + <span class="reagent">NH₃</span> (reflux en benceno, -2H₂O).',
     context: 'Un 1,4-dicetona cicla con amoníaco para formar un pirrol sustituido.',
-    smiles: 'Cc1cc(C)c[nH]1',
-    acceptedSmiles: ['Cc1ccc([nH]1)C'],
+    smiles: 'CC1=CC=C(C)[NH]1',
+    acceptedSmiles: ['Cc1cc(C)c[nH]1', 'Cc1ccc([nH]1)C'],
     commonMistakes: [
       { smiles: 'CC(=O)CC(=O)CC', reason: 'Dibujaste la hexanodiona lineal. El producto es un anillo de pirrol ciclico.' },
       { smiles: 'c1cc[nH]c1', reason: 'Dibujaste pirrol sin sustituyentes. El producto es 2,5-dimetilpirrol.' }
@@ -367,8 +367,8 @@ const PROBLEMS = [
     title: 'Síntesis de Hantzsch (pirrol)',
     prompt: 'Dibuja el pirrol resultante de la <strong>síntesis de Hantzsch</strong> (pirrol con éster etílico en C3 y grupos metilo en C2 y C5).',
     context: 'Reacción entre una α-halocetona, un β-cetoéster y amoníaco.',
-    smiles: 'CCOC(=O)c1cc(C)[nH]c1C',
-    acceptedSmiles: ['CCOC(=O)C1=C(C)NC(C)=C1', 'CCOC(=O)c1cc(C)nc1C'],
+    smiles: 'CCOC(=O)C1=C(C)NC(C)=C1',
+    acceptedSmiles: ['CCOC(=O)c1cc(C)[nH]c1C', 'CCOC(=O)c1cc(C)nc1C'],
     commonMistakes: [
       { smiles: 'c1cc[nH]c1', reason: 'Dibujaste el pirrol sin sustituyentes. La síntesis da un pirrol polisustituido.' }
     ],
@@ -385,7 +385,7 @@ const PROBLEMS = [
     prompt: 'Dibuja la estructura del <strong>furano</strong>.',
     context: 'Heterociclo oxigenado aromático de 5 miembros.',
     smiles: 'c1ccoc1',
-    acceptedSmiles: ['o1cccc1'],
+    acceptedSmiles: ['c1ccoc1', 'o1cccc1'],
     commonMistakes: [
       { smiles: 'C1CCOC1', reason: 'Dibujaste THF (saturado). El furano es aromático con dobles enlaces.' },
       { smiles: 'c1ccsc1', reason: 'Dibujaste tiofeno. El furano tiene oxígeno.' }
@@ -415,8 +415,8 @@ const PROBLEMS = [
     title: 'Nitración del furano',
     prompt: 'Dibuja el producto de la <strong>nitración del furano</strong> con <span class="reagent">AcONO₂ / Ac₂O, -5°C</span>.',
     context: 'La sustitución electrofílica en furano ocurre en C2 (α al oxígeno).',
-    smiles: 'c1cc([N+](=O)[O-])oc1',
-    acceptedSmiles: ['O=[N+]([O-])c1ccoc1'],
+    smiles: 'O=[N+]([O-])C1=CC=CO1',
+    acceptedSmiles: ['c1cc([N+](=O)[O-])oc1', 'O=[N+]([O-])c1ccoc1'],
     commonMistakes: [
       { smiles: 'c1ccoc1', reason: 'Dibujaste furano sin sustituir.' },
       { smiles: 'c1coc([N+](=O)[O-])c1', reason: 'Nitración en C3 (β). La posición α (C2) es más reactiva.' }
@@ -431,7 +431,7 @@ const PROBLEMS = [
     title: 'Síntesis de Paal-Knorr (furano)',
     prompt: 'Dibuja el producto de la <strong>síntesis de Paal-Knorr para furano</strong>: 1,4-dicetona + <span class="reagent">H⁺, Δ, -H₂O</span>.',
     context: 'Ciclización de 1,4-dicarbonílicos en ácido para formar furanos sustituidos.',
-    smiles: 'Cc1cc(C)oc1',
+    smiles: 'CC1=CC=C(C)O1',
     acceptedSmiles: [],
     commonMistakes: [
       { smiles: 'Cc1cc(C)c[nH]1', reason: 'Dibujaste pirrol. El furano tiene oxígeno en el anillo, no nitrógeno.' }
@@ -448,8 +448,8 @@ const PROBLEMS = [
     title: 'Tiofeno',
     prompt: 'Dibuja la estructura del <strong>tiofeno</strong>.',
     context: 'Heterociclo aromático con azufre. Presente en algunas plantas.',
-    smiles: 'c1ccsc1',
-    acceptedSmiles: ['s1cccc1'],
+    smiles: 'C1=CSC=C1',
+    acceptedSmiles: ['s1cccc1', 'c1ccsc1'],
     commonMistakes: [
       { smiles: 'c1ccoc1', reason: 'Dibujaste furano. El tiofeno tiene azufre (S), no oxígeno.' },
       { smiles: 'c1cc[nH]c1', reason: 'Dibujaste pirrol. El tiofeno tiene azufre.' }
@@ -464,8 +464,8 @@ const PROBLEMS = [
     title: 'Nitración del tiofeno',
     prompt: 'Dibuja el producto de la <strong>nitración del tiofeno</strong> con <span class="reagent">AcONO₂, 0°C</span>.',
     context: 'Sustitución electrofílica en posición 2 (α al azufre).',
-    smiles: 'c1cc([N+](=O)[O-])sc1',
-    acceptedSmiles: ['O=[N+]([O-])c1ccsc1'],
+    smiles: '[O-][N+](C1=CC=CS1)=O',
+    acceptedSmiles: ['O=[N+]([O-])c1ccsc1', 'c1cc([N+](=O)[O-])sc1'],
     commonMistakes: [
       { smiles: 'c1ccsc1', reason: 'Dibujaste tiofeno sin sustituir.' }
     ],
@@ -479,8 +479,8 @@ const PROBLEMS = [
     title: 'Acilación del tiofeno (Friedel-Crafts)',
     prompt: 'Dibuja el producto de la <strong>acilación del tiofeno</strong> con <span class="reagent">CH₃COCl / SnCl₄</span>.',
     context: 'Forma 2-acetiltiofeno.',
-    smiles: 'CC(=O)c1ccsc1',
-    acceptedSmiles: [],
+    smiles: 'CC(C1=CC=CS1)=O',
+    acceptedSmiles: ['CC(=O)c1ccsc1'],
     commonMistakes: [
       { smiles: 'CC(=O)c1cccs1', reason: 'Posición incorrecta. La acetilación ocurre en C2.' }
     ],
@@ -494,8 +494,8 @@ const PROBLEMS = [
     title: 'Formilación del tiofeno (Vilsmeier-Haack)',
     prompt: 'Dibuja el producto de la <strong>formilación del tiofeno</strong>: 1) <span class="reagent">C₆H₅N(CH₃)CHO, POCl₃</span>  2) <span class="reagent">H₂O</span>.',
     context: 'Reacción de Vilsmeier-Haack introduce -CHO en posición 2.',
-    smiles: 'O=Cc1ccsc1',
-    acceptedSmiles: ['O=Cc1cccs1'],
+    smiles: 'O=CC1=CC=CS1',
+    acceptedSmiles: ['O=Cc1cccs1', 'O=Cc1ccsc1'],
     commonMistakes: [
       { smiles: 'c1ccsc1', reason: 'Dibujaste tiofeno sin formilar.' }
     ],
@@ -622,8 +622,8 @@ const PROBLEMS = [
     title: 'Benzotiofeno',
     prompt: 'Dibuja la estructura del <strong>benzotiofeno</strong> (benzo[b]tiofeno).',
     context: 'Benceno fusionado con tiofeno.',
-    smiles: 'c1ccc2sccc2c1',
-    acceptedSmiles: [],
+    smiles: 'C1=CSC2=C1C=CC=C2',
+    acceptedSmiles: ['c1cc2ccsc2cc1'],
     commonMistakes: [
       { smiles: 'c1ccc2occc2c1', reason: 'Dibujaste benzofurano. El benzotiofeno tiene S, no O.' }
     ],
@@ -637,8 +637,8 @@ const PROBLEMS = [
     title: 'Acetilación del benzofurano',
     prompt: 'Dibuja el producto de la <strong>acetilación del benzofurano</strong> con <span class="reagent">(CH₃CO)₂O / SnCl₄</span>.',
     context: 'Sustitución electrofílica en C2 del benzofurano.',
-    smiles: 'CC(=O)c1oc2ccccc2c1',
-    acceptedSmiles: ['CC(=O)c1cc2ccccc2o1'],
+    smiles: 'CC(C1=CC2=CC=CC=C2O1)=O',
+    acceptedSmiles: ['CC(=O)c1oc2ccccc2c1', 'CC(=O)c1cc2ccccc2o1'],
     commonMistakes: [
       { smiles: 'c1ccc2occc2c1', reason: 'Dibujaste benzofurano sin acetilar.' }
     ],
@@ -652,7 +652,7 @@ const PROBLEMS = [
     title: 'Nitración del benzotiofeno',
     prompt: 'Dibuja el producto de la <strong>nitración del benzotiofeno</strong> con <span class="reagent">HNO₃/AcOH, 70°C</span>.',
     context: 'En benzotiofeno la nitración ocurre en C3 (posición β).',
-    smiles: 'c1ccc2c(c1)sc([N+](=O)[O-])c2',
+    smiles: '[O-][N+](C1=CC2=CC=CC=C2S1)=O',
     acceptedSmiles: ['O=[N+]([O-])c1cc2ccccc2s1'],
     commonMistakes: [
       { smiles: 'c1ccc2sc([N+](=O)[O-])cc2c1', reason: 'Nitraste en C2. En benzotiofeno la nitración con HNO₃/AcOH va a C3.' }
@@ -670,7 +670,7 @@ const PROBLEMS = [
     prompt: 'Dibuja la estructura de la <strong>piridina</strong>.',
     context: 'Heterociclo aromático de 6 miembros con un nitrógeno. Base de muchas vitaminas y alcaloides.',
     smiles: 'c1ccncc1',
-    acceptedSmiles: ['n1ccccc1'],
+    acceptedSmiles: ['c1ccncc1', 'n1ccccc1'],
     commonMistakes: [
       { smiles: 'c1cc[nH]c1', reason: 'Dibujaste pirrol (5 miembros). La piridina tiene 6 miembros.' },
       { smiles: 'c1ccccc1', reason: 'Dibujaste benceno. La piridina tiene un nitrógeno en el anillo.' }

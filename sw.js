@@ -1,16 +1,16 @@
-const CACHE_NAME = 'organicca-cache-v1';
+const CACHE_NAME = 'organicca-cache-v6';
 const ASSETS = [
   './',
   './index.html',
   './css/styles.css',
+  './js/openchemlib.bundle.js',
   './js/problems.js',
   './js/theory.js',
   './js/validator.js',
   './js/app.js',
   './assets/icon.svg',
   './manifest.json',
-  'https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap',
-  'https://cdn.jsdelivr.net/npm/openchemlib@9.6.0/dist/openchemlib-full.js'
+  'https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap'
 ];
 
 self.addEventListener('install', event => {
@@ -43,4 +43,11 @@ self.addEventListener('fetch', event => {
         });
       })
   );
+});
+
+// Escuchar mensaje desde la app para forzar actualización
+self.addEventListener('message', event => {
+  if (event.data && event.data.action === 'SKIP_WAITING') {
+    self.skipWaiting();
+  }
 });

@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 400" width="100%" height="100%" style="background:#ffffff; border-radius:8px;">
+  <!-- Título -->
+  <text x="250" y="40" font-family="Arial" font-size="20" font-weight="bold" text-anchor="middle" fill="#333">Cómo dibujar Tiofeno en JSME</text>
+
+  <!-- Leyenda y Pasos -->
+  <rect x="20" y="70" width="180" height="150" fill="#f8fafc" stroke="#cbd5e1" rx="8"/>
+  <text x="30" y="95" font-family="Arial" font-size="14" font-weight="bold" fill="#0f172a">Pasos:</text>
+  <text x="30" y="120" font-family="Arial" font-size="12" fill="#334155">1. S en esquina inf. derecha</text>
+  <text x="30" y="145" font-family="Arial" font-size="12" fill="#334155">2. Doble enlace inf. izquierda</text>
+  <text x="30" y="170" font-family="Arial" font-size="12" fill="#334155">3. Doble enlace sup. derecha</text>
+  <text x="30" y="195" font-family="Arial" font-size="12" fill="#b91c1c" font-weight="bold">¡Nunca deben tocarse!</text>
+
+  <!-- Centro del pentágono en (330, 200) -->
+  <!-- Top: 330, 80 -->
+  <!-- Left: 216, 163 -->
+  <!-- Bottom-Left: 259, 297 -->
+  <!-- Bottom-Right (S): 401, 297 -->
+  <!-- Right: 444, 163 -->
+
+  <!-- Single bonds (Black, thick) -->
+  <line x1="330" y1="80" x2="216" y2="163" stroke="#000" stroke-width="4"/> <!-- Top to Left -->
+  <line x1="216" y1="163" x2="259" y2="297" stroke="#000" stroke-width="4"/> <!-- Left to Bottom-Left -->
+  <line x1="259" y1="297" x2="360" y2="297" stroke="#000" stroke-width="4"/> <!-- Bottom-Left to S -->
+  <line x1="444" y1="163" x2="415" y2="252" stroke="#000" stroke-width="4"/> <!-- Right to S -->
+  <line x1="444" y1="163" x2="330" y2="80" stroke="#000" stroke-width="4"/> <!-- Right to Top -->
+
+  <!-- Double bond inner lines (Blue to highlight them) -->
+  <!-- Inner left: parallel to (216,163)-(259,297), shifted right -->
+  <line x1="233" y1="172" x2="271" y2="288" stroke="#2563eb" stroke-width="4"/> 
+  <text x="200" y="240" font-family="Arial" font-size="14" font-weight="bold" fill="#2563eb">1º Doble Enlace</text>
+
+  <!-- Inner right: parallel to (444,163)-(330,80), shifted down -->
+  <line x1="424" y1="168" x2="333" y2="102" stroke="#2563eb" stroke-width="4"/>
+  <text x="390" y="110" font-family="Arial" font-size="14" font-weight="bold" fill="#2563eb">2º Doble Enlace</text>
+
+  <!-- Sulfur Atom -->
+  <text x="401" y="310" font-family="Arial" font-size="40" font-weight="bold" text-anchor="middle" fill="#ca8a04">S</text>
+
+  <!-- Highlight circles for valid separation -->
+  <circle cx="330" cy="80" r="15" fill="none" stroke="#16a34a" stroke-width="3" stroke-dasharray="5,5"/>
+  <text x="330" y="60" font-family="Arial" font-size="12" font-weight="bold" text-anchor="middle" fill="#16a34a">Separados</text>
+
+  <!-- Error mark to avoid Allene -->
+  <line x1="200" y1="140" x2="232" y2="186" stroke="#b91c1c" stroke-width="3" opacity="0.5"/>
+  <line x1="232" y1="140" x2="200" y2="186" stroke="#b91c1c" stroke-width="3" opacity="0.5"/>
+  <text x="140" y="160" font-family="Arial" font-size="12" font-weight="bold" fill="#b91c1c" opacity="0.8">NO aquí</text>
+</svg>
