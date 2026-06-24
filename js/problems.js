@@ -622,8 +622,8 @@ const PROBLEMS = [
     title: 'Benzotiofeno',
     prompt: 'Dibuja la estructura del <strong>benzotiofeno</strong> (benzo[b]tiofeno).',
     context: 'Benceno fusionado con tiofeno.',
-    smiles: 'C1=CSC2=C1C=CC=C2',
-    acceptedSmiles: ['c1cc2ccsc2cc1'],
+    smiles: 'c1ccc2sccc2c1',
+    acceptedSmiles: ['C1=CSC2=C1C=CC=C2', 'c1cc2ccsc2cc1', 'c1ccc2sccc2c1', 'S1C=CC2=C1C=CC=C2'],
     commonMistakes: [
       { smiles: 'c1ccc2occc2c1', reason: 'Dibujaste benzofurano. El benzotiofeno tiene S, no O.' }
     ],
@@ -715,8 +715,8 @@ const PROBLEMS = [
     title: 'Protonación de la piridina',
     prompt: 'Dibuja el producto de la <strong>protonación de la piridina</strong> con <span class="reagent">HCl</span>.',
     context: 'Forma el catión piridinio.',
-    smiles: '[NH+]1ccccc1.[Cl-]',
-    acceptedSmiles: ['Cl.[NH+]1ccccc1', '[NH+]1=CC=CC=C1'],
+    smiles: 'C1=CC=[NH+]C=C1.[Cl-]',
+    acceptedSmiles: ['Cl.[NH+]1ccccc1', '[NH+]1=CC=CC=C1', '[NH+]1ccccc1.[Cl-]', 'C1=CC=[NH+]C=C1.[Cl-]'],
     commonMistakes: [
       { smiles: 'c1ccncc1', reason: 'Dibujaste piridina neutra. La protonación ocurre sobre el N (piridinio).' }
     ],
@@ -795,8 +795,8 @@ const PROBLEMS = [
     title: 'Timina',
     prompt: 'Dibuja la estructura de la <strong>timina</strong> (base del ADN).',
     context: 'Base pirimídica con metilo en C5 y grupos oxo.',
-    smiles: 'Cc1cn(C)c(=O)nc1O',
-    acceptedSmiles: ['Cc1c[nH]c(=O)nc1O'],
+    smiles: 'CC1=CNC(=O)NC1=O',
+    acceptedSmiles: ['Cc1c[nH]c(=O)[nH]c1=O', 'Cc1cnc(O)nc1O', 'CC1=CNC(=O)NC1=O'],
     commonMistakes: [
       { smiles: 'Nc1cc(=O)[nH]cn1', reason: 'Dibujaste citosina. La timina tiene metilo en C5 y N-metilo.' }
     ],
@@ -844,8 +844,8 @@ const PROBLEMS = [
     title: 'Isoquinolina',
     prompt: 'Dibuja la estructura de la <strong>isoquinolina</strong>.',
     context: 'Isómero de la quinolina. Base de alcaloides del opio.',
-    smiles: 'c1ccc2c(nccc2)c1',
-    acceptedSmiles: ['c1ccc2nccnc2c1'],
+    smiles: 'c1ccc2cnccc2c1',
+    acceptedSmiles: ['C1=CC=C2C=NC=CC2=C1', 'c1ccc2cnccc2c1', 'c1cc2ccnnc2cc1'],
     commonMistakes: [
       { smiles: 'c1ccc2ncccc2c1', reason: 'Dibujaste quinolina. En isoquinolina el N está en posición 2 del anillo fusionado.' }
     ],
@@ -859,8 +859,8 @@ const PROBLEMS = [
     title: 'Esqueleto de morfina (simplificado)',
     prompt: 'Dibuja el <strong>esqueleto base del sistema de morfina</strong> (pentaciclo con nitrógeno). Representación simplificada: el núcleo isoquinolínico fusionado.',
     context: 'La morfina contiene un esqueleto pentacíclico. Para este ejercicio dibuja la isoquinolina como núcleo base.',
-    smiles: 'c1ccc2c(nccc2)c1',
-    acceptedSmiles: ['c1ccc2nccnc2c1', 'c1ccc2ncccc2c1'],
+    smiles: 'c1ccc2cnccc2c1',
+    acceptedSmiles: ['c1ccc2cnccc2c1', 'C1=CC=C2C=NC=CC2=C1'],
     commonMistakes: [],
     explanation: 'La morfina se basa en un esqueleto de isoquinolina fusionado con otros anillos. Como primer paso, reconoce la isoquinolina.',
     hints: ['Empieza por isoquinolina.', 'El alcaloide tiene N básico.']

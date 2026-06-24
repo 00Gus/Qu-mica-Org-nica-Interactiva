@@ -2,172 +2,155 @@ const THEORY_DATA = [
   {
     id: "introduccion",
     title: "Introducción a la Plataforma",
+    theme: "intro",
     content: `
-      <p>Bienvenida a tu guía teórica de Química Orgánica. Este apartado está diseñado para consolidar tus conocimientos sobre sistemas aromáticos y heterocíclicos, sus propiedades físicas y químicas, así como su reactividad principal.</p>
-      <div class="theory-card">
-        <h4>Recomendación de Estudio</h4>
-        <p>Lee cuidadosamente los <strong>Compuestos de Interés</strong> listados aquí. Esta información ha sido recopilada específicamente para tu perfil. Luego podrás evaluarte en la nueva pestaña de <strong>Quizz</strong>.</p>
+      <p style="color: var(--text-inverse); font-size: 1.1rem; line-height: 1.7; margin-bottom: 2rem;">
+        Bienvenida a tu guía teórica de Química Orgánica. Este apartado está diseñado para consolidar tus conocimientos sobre sistemas aromáticos y heterocíclicos, sus propiedades físicas y químicas, así como su reactividad principal.
+      </p>
+      <div class="theory-card-premium intro-card">
+        <h4>💡 Recomendación de Estudio</h4>
+        <p>Lee cuidadosamente los <strong>Compuestos de Interés</strong> listados aquí. Esta información ha sido recopilada específicamente para tu perfil. Luego podrás evaluarte en la pestaña de <strong>Quizz</strong>.</p>
       </div>
-    `
+    `,
+    compounds: []
   },
   {
     id: "bencenos",
     title: "Bencenos y Arenos",
-    content: `
-      <h3>Compuestos de Interés</h3>
-      <ul>
-        <li><strong>Ácido para-aminobenzoico (PABA).</strong> Substancia de origen natural que se usa en los productos de protección solar y cuidado de la piel, donde a veces se le llama vitamina Bx. Puede encontrarse en la levadura de cerveza, hígado, champiñones y espinaca, en este caso también se le llama vitamina B10. Es esencial para el metabolismo de algunas bacterias pero no al de los seres humanos.</li>
-        <li><strong>Sulfamidas (sulfas).</strong> Substancias bacteriostáticas que inhiben el desarrollo de los microorganismos por competencia en el metabolismo con el PABA. Un ejemplo es la sulfadiazina.</li>
-        <li><strong>Ácido acetilsalicílico (aspirina).</strong> Un analgésico de uso común.</li>
-        <li><strong>Paracetamol (acetaminofeno).</strong> Medicamento que se usa para el alivio de la fiebre, el dolor y algunas molestias relacionadas con la gripe y catarro. Entre sus efectos secundarios o adversos están las náuseas, vómito, dolor epigástrico, somnolencia, ictericia, daño hepático, daño renal, metahemoglobinemia y erupciones cutáneas.</li>
-        <li><strong>Fenilalanina.</strong> Un aminoácido esencial, existe una rara enfermedad hereditaria llamada <em>fenilcetonuria</em> en la que un bebé nace sin la capacidad de descomponerlo. Los aminoácidos esenciales no pueden ser sintetizados por el ser humano y deben obtenerse de la alimentación.</li>
-        <li><strong>Triptófano.</strong> Un aminoácido esencial. El cuerpo utiliza el triptófano para ayudar a producir la niacina y la serotonina. Esta última se cree que produce un sueño saludable y un estado de ánimo estable.</li>
-        <li><strong>Kevlar.</strong> Marca registrada de una fibra sintética usada en los chalecos antibalas. Químicamente es poli-para-fenileno tereftalamida.</li>
-        <li><strong>DDT.</strong> Un insecticida cuyo uso se prohibió en 1972 porque no es biodegradable, se incorpora a la cadena alimentaria y produce la muerte de aves y peces que consumen insectos.</li>
-        <li><strong>Trinitrotolueno (TNT).</strong> Un explosivo que se funde a 82°C y no explota a menos de 240°C sin detonador. Es relativamente resistente a los choques, puede fundirse en moldes calentados con vapor y por estos motivos se usa ampliamente en municiones o demoliciones.</li>
-      </ul>
-    `
+    theme: "benzene",
+    content: `<p class="theory-subtitle">Derivados aromáticos del Benceno de importancia biológica e industrial.</p>`,
+    compounds: [
+      { name: "Ácido para-aminobenzoico (PABA)", tags: ["Vitamina", "Biológico"], description: "Substancia de origen natural que se usa en los productos de protección solar y cuidado de la piel, donde a veces se le llama vitamina Bx o B10. Es esencial para el metabolismo de algunas bacterias pero no para los seres humanos.", smiles: "NC1=CC=C(C(O)=O)C=C1" },
+      { name: "Sulfamidas (sulfas)", tags: ["Fármaco", "Bacteriostático"], description: "Substancias que inhiben el desarrollo de los microorganismos por competencia en el metabolismo con el PABA. Un ejemplo es la sulfadiazina.", smiles: "NC1=CC=C(S(=O)(NC2=NC=CC=N2)=O)C=C1" },
+      { name: "Ácido acetilsalicílico (Aspirina)", tags: ["Fármaco", "Analgésico"], description: "Un analgésico de uso muy común a nivel mundial.", smiles: "CC(=O)OC1=CC=CC=C1C(O)=O" },
+      { name: "Paracetamol", tags: ["Fármaco", "Analgésico"], description: "Medicamento usado para aliviar fiebre y dolor. Efectos secundarios adversos incluyen náuseas, daño hepático y renal, e ictericia.", smiles: "CC(=O)NC1=CC=C(O)C=C1" },
+      { name: "Fenilalanina", tags: ["Aminoácido", "Esencial"], description: "Un aminoácido esencial. Existe una rara enfermedad hereditaria llamada fenilcetonuria en la que un bebé nace sin la capacidad de descomponerlo.", smiles: "NC(CC1=CC=CC=C1)C(O)=O" },
+      { name: "Triptófano", tags: ["Aminoácido", "Esencial"], description: "El cuerpo lo utiliza para producir niacina y serotonina. Esta última produce sueño saludable y un estado de ánimo estable.", smiles: "NC(CC1=CNC2=CC=CC=C12)C(O)=O" },
+      { name: "Kevlar", tags: ["Material", "Sintético"], description: "Fibra sintética usada en los chalecos antibalas. Químicamente es poli-para-fenileno tereftalamida.", smiles: "C1=CC(=CC=C1C(=O)NC2=CC=C(C=C2)N)C(=O)O" },
+      { name: "DDT", tags: ["Tóxico", "Insecticida"], description: "Uso prohibido en 1972 porque no es biodegradable, se incorpora a la cadena alimentaria y mata aves y peces que consumen insectos contaminados.", smiles: "ClC1=CC=C(C(C2=CC=C(Cl)C=C2)C(Cl)(Cl)Cl)C=C1" },
+      { name: "Trinitrotolueno (TNT)", tags: ["Explosivo", "Industrial"], description: "Funde a 82°C y no explota a menos de 240°C sin detonador. Es relativamente resistente a choques, lo que lo hace muy usado en demoliciones.", smiles: "CC1=C(N(=O)=O)C=C(N(=O)=O)C=C1N(=O)=O" }
+    ]
   },
   {
     id: "pirrol",
     title: "Pirrol",
-    content: `
-      <h3>Compuestos de Interés</h3>
-      <ul>
-        <li><strong>Porfobilinógeno.</strong> Precursor en la biosíntesis de la hemoglobina y clorofila. Algunas enfermedades como la hepatitis y la porfiria están asociadas con niveles anormales de porfobilinógeno en la sangre.</li>
-        <li><strong>Porfirina.</strong> Un compuesto conjugado formado por cuatro anillos de pirrol unidos entre sí por los carbonos 2 y 5 mediante puentes de metino =CH-. No se encuentra libre en la naturaleza, pero sí formando parte de productos naturales importantes como la hemoglobina y la clorofila, ya sea como el compuesto base o como sistemas de anillos relacionados. Por ejemplo, la <em>corrina</em> es un sistema similar que tiene un enlace directo entre los carbonos 2 y 5 y tres puentes de metino en vez de cuatro, es la estructura central de la vitamina B12.</li>
-        <li><strong>Clorofila.</strong> Pigmento vegetal que interviene en la fotosíntesis absorbiendo un fotón.</li>
-        <li><strong>Hemo.</strong> Es muy similar a la clorofila, su diferencia más notoria es que el hemo tiene un átomo de hierro y la clorofila uno de magnesio.</li>
-        <li><strong>Hemoglobina.</strong> Pigmento sanguíneo encargado de llevar oxígeno de los pulmones hacia los tejidos, y CO2 de los tejidos hacia los pulmones. Está formada del pigmento hemo y una proteína llamada globina.</li>
-        <li><strong>Bilirrubina.</strong> Un pigmento biliar que también se excreta en la orina. Una concentración elevada en la sangre puede indicar problemas en el hígado o vesícula biliar. Los pigmentos biliares de los mamíferos contienen cuatro anillos de pirrol unidos por puentes de metino entre los carbonos 2 y 5, son productos de degradación de la hemoglobina.</li>
-        <li><strong>Citocromos.</strong> Enzimas relacionadas con la transferencia de electrones. Su sitio activo también es el pigmento hemo.</li>
-        <li><strong>Fitocromo.</strong> Un pigmento foto-receptor de las plantas.</li>
-        <li><strong>Vitamina B12 (cobalamina).</strong> Es importante para el metabolismo, interviene en la formación de los eritrocitos y en el mantenimiento del sistema nervioso central. Su estructura tiene un átomo de cobalto en el centro formando un complejo de coordinación con la corrina.</li>
-        <li><strong>Ketorolaco.</strong> Medicamento analgésico y anti-inflamatorio.</li>
-      </ul>
-    `
+    theme: "pyrrole",
+    content: `<p class="theory-subtitle">Sistemas heterocíclicos de cinco miembros con nitrógeno, vitales para la vida (clorofila, hemoglobina).</p>`,
+    compounds: [
+      { name: "Porfobilinógeno", tags: ["Metabolito", "Precursor"], description: "Precursor en la biosíntesis de hemoglobina y clorofila. La hepatitis y la porfiria están asociadas con niveles anormales de este compuesto en sangre.", smiles: "NCC1=C(CCC(O)=O)C(CC(O)=O)=CN1" },
+      { name: "Porfirina", tags: ["Macrociclo", "Biológico"], description: "Compuesto conjugado de cuatro anillos de pirrol unidos por puentes metino. Forma parte de la hemoglobina y clorofila. La corrina es similar pero estructura central de la vitamina B12.", smiles: "C1=CC2=CC3=CC=C(N3)C=C4C=CC(=N4)C=C5C=CC(=N5)C=C1N2" },
+      { name: "Clorofila", tags: ["Pigmento", "Vegetal"], description: "Pigmento vegetal que interviene en la fotosíntesis absorbiendo fotones. Contiene un átomo de Magnesio en su centro.", smiles: "CCC1=C(C)C2=CC3=C(C)C(=C(CC)C4=N3[Mg]56<-N2=C1C(=C7C(=C(C)C(=N75)C=C8C(C(C(=N86)C=4)C(=O)OC)CC(=O)OCCC(C)CCCC(C)CCCC(C)C)C)C)C" },
+      { name: "Hemo", tags: ["Pigmento", "Biológico"], description: "Muy similar a la clorofila, pero tiene un átomo de Hierro en lugar de magnesio.", smiles: "CC1=C(CCC(O)=O)C2=CC3=C(CCC(O)=O)C(C)=C4C=C5C(C)=C(C=C)C6=CC1=N2[Fe]78N3C4=C5N7=C6" },
+      { name: "Hemoglobina", tags: ["Proteína", "Transporte"], description: "Pigmento sanguíneo que transporta O2 a los tejidos y CO2 a los pulmones. Formada por el pigmento hemo y la proteína globina.", smiles: "CC1=C(CCC(O)=O)C2=CC3=C(CCC(O)=O)C(C)=C4C=C5C(C)=C(C=C)C6=CC1=N2[Fe]78N3C4=C5N7=C6" },
+      { name: "Bilirrubina", tags: ["Pigmento biliar", "Metabolito"], description: "Contiene cuatro anillos de pirrol unidos. Es producto de degradación de la hemoglobina; niveles altos indican problemas hepáticos.", smiles: "CC1=C(CCC(O)=O)C(=C(C)C(=O)N1)CC2=C(C)C(=C(C=C)N2)C=C3C(=C(C)C(=CC4=C(C)C(=C(C=C)N4)O)N3)CCC(O)=O" },
+      { name: "Citocromos", tags: ["Enzima", "Biológico"], description: "Enzimas relacionadas con la transferencia de electrones cuyo sitio activo es el pigmento hemo.", smiles: "CC1=C(CCC(O)=O)C2=CC3=C(CCC(O)=O)C(C)=C4C=C5C(C)=C(C=C)C6=CC1=N2[Fe]78N3C4=C5N7=C6" },
+      { name: "Fitocromo", tags: ["Pigmento", "Receptor"], description: "Un pigmento foto-receptor de las plantas.", smiles: "C1=C(C)C(=O)NC1=CC2=C(C)C(=C(C=C)N2)CC3=C(C)C(=C(C=C)N3)C=C4C(=C(C)C(=O)N4)CCC(O)=O" },
+      { name: "Vitamina B12 (Cobalamina)", tags: ["Vitamina", "Coordinación"], description: "Interviene en formación de eritrocitos y mantenimiento del sistema nervioso central. Tiene un átomo de cobalto formando un complejo con la corrina.", smiles: "CC1=C2N3C(C=C4C(=C(C)C5=N4[Co]367N8C(=C(C)C9=N6C(=C(C)C2=N7)C(C)(C)C9CCC(=O)N)C(C)(C)C8CCC(=O)N)C(C)(C)C5CCC(=O)N)C(C)(C)C1CCC(=O)NCC(C)OP(=O)(O)OC1C(CO)OC(C1O)N1C=NC2=C(C)C(C)=CC=C21" },
+      { name: "Ketorolaco", tags: ["Fármaco", "AINEs"], description: "Medicamento analgésico y anti-inflamatorio no esteroideo.", smiles: "OC(=O)C1CCN2C1=CC=C2C(=O)C3=CC=CC=C3" }
+    ]
   },
   {
     id: "furano",
     title: "Furano",
-    content: `
-      <h3>Compuestos de Interés</h3>
-      <ul>
-        <li><strong>Tetrahidrofurano (THF).</strong> Un solvente muy utilizado.</li>
-        <li><strong>Ácido ascórbico ("vitamina C").</strong> Una vitamina hidrosoluble necesaria para el crecimiento y reparación de tejidos en todas las partes del cuerpo, una deficiencia grave produce el escorbuto.</li>
-        <li><strong>Furfuril Tiol.</strong> Componente del aroma del café tostado y aprobado para su uso como saboreador o aromatizante artificial en alimentos.</li>
-        <li><strong>Nitrofurazona.</strong> Un bactericida.</li>
-        <li><strong>Ranitidina.</strong> Medicamento para el tratamiento de la úlcera gástrica.</li>
-      </ul>
-    `
+    theme: "furan",
+    content: `<p class="theory-subtitle">Sistemas heterocíclicos oxigenados de cinco miembros.</p>`,
+    compounds: [
+      { name: "Tetrahidrofurano (THF)", tags: ["Solvente", "Industrial"], description: "Un solvente muy utilizado en el laboratorio químico.", smiles: "C1CCOC1" },
+      { name: "Ácido ascórbico (Vitamina C)", tags: ["Vitamina", "Antioxidante"], description: "Hidrosoluble, necesaria para el crecimiento y reparación de tejidos. Su deficiencia produce escorbuto.", smiles: "OC(CO)C1OC(=O)C(O)=C1O" },
+      { name: "Furfuril Tiol", tags: ["Aroma", "Alimentos"], description: "Componente del aroma del café tostado, usado como saboreador artificial.", smiles: "SCC1=CC=CO1" },
+      { name: "Nitrofurazona", tags: ["Fármaco", "Bactericida"], description: "Agente antibacteriano de uso tópico.", smiles: "O=N(=O)C1=CC=C(O1)C=NNC(N)=O" },
+      { name: "Ranitidina", tags: ["Fármaco", "Gastrointestinal"], description: "Medicamento para el tratamiento de la úlcera gástrica y reducción de ácido estomacal.", smiles: "CNC(=C[N+](=O)[O-])NCCSCC1=CC=C(O1)CN(C)C" }
+    ]
   },
   {
     id: "tiofeno",
     title: "Tiofeno",
-    content: `
-      <h3>Compuestos de Interés</h3>
-      <p>En su forma aromática no se encuentra en el metabolismo animal, pero sí en algunas plantas.</p>
-      <ul>
-        <li><strong>Biotina.</strong> (Sinónimos: vitamina H, Vitamina B7). Interviene en el metabolismo de los carbohidratos, grasas, purinas y aminoácidos.</li>
-        <li>El <strong>Pirantel</strong> es un antihelmíntico que se usa en humanos y también en veterinaria.</li>
-        <li>El <strong>clorhidrato de metapirileno</strong> es un antihistamínico que se retiró del mercado en muchos países en 1979, porque se descubrió que su uso prolongado contribuye a causar cáncer; también es hepatotóxico. Se introdujo en 1947 y se incorporó a muchos medicamentos de venta libre. Se puede encontrar en medicamentos antiguos para los resfriados o la gripe, hay reportes de intoxicación y muerte por sobredosis.</li>
-        <li>Se han desarrollado polímeros orgánicos de tiofeno capaces de <strong>conducir la electricidad</strong>.</li>
-      </ul>
-    `
+    theme: "thiophene",
+    content: `<p class="theory-subtitle">Sistemas heterocíclicos de cinco miembros con azufre. En forma aromática no están en el metabolismo animal, pero sí en plantas.</p>`,
+    compounds: [
+      { name: "Biotina (Vitamina H / B7)", tags: ["Vitamina", "Metabolismo"], description: "Interviene en el metabolismo de carbohidratos, grasas, purinas y aminoácidos.", smiles: "O=C1NC2CSCC(CCCCC(=O)O)C2N1" },
+      { name: "Pirantel", tags: ["Fármaco", "Antihelmíntico"], description: "Usado contra lombrices e infecciones parasitarias en humanos y veterinaria.", smiles: "CN1C(=NC=C1C=CC2=CC=CS2)C" },
+      { name: "Clorhidrato de metapirileno", tags: ["Tóxico", "Antihistamínico"], description: "Se retiró en 1979 por contribuir al cáncer y hepatotoxicidad. Fue muy usado en medicamentos de venta libre para resfriados.", smiles: "CN(C)CCN(CC1=CC=CS1)C2=NC=CC=C2" },
+      { name: "Polímeros de Tiofeno", tags: ["Material", "Conductor"], description: "Polímeros orgánicos desarrollados con capacidad para conducir electricidad.", smiles: "C1=CSC=C1" }
+    ]
   },
   {
     id: "indol",
     title: "Indol",
-    content: `
-      <h3>Compuestos de Interés</h3>
-      <ul>
-        <li>(ISOINDOL) la <strong>talidomida</strong>, en su estructura se encuentra la 1,3 diona del isoindol. Es un fármaco que se comercializó entre 1958-1963 como sedante y como calmante de las náuseas que ocurren en los primeros tres meses del embarazo, hasta que se descubrió que produce anomalías congénitas irreversibles como la focomelia (huesos largos de las extremidades muy cortos o inexistentes), ausencia o malformación del oído externo, defectos en los ojos y ausencia de las aperturas normales en el tracto gastrointestinal.</li>
-        <li>El indol se encuentra como tal en los jazmines, flores de naranjo, frutas cítricas, etc. Forma parte de la estructura del <strong>triptófano</strong> (un aminoácido esencial al hombre y otros organismos vivientes).</li>
-        <li>El colorante <strong>índigo</strong> es de color azul, se obtiene por hidrólisis y aireación de la 3-indolinona (IUPAC: 1,2-dihidro-3H-indol-3-ona), la cual es un compuesto inestable de color amarillo de origen vegetal.</li>
-        <li>El <strong>púrpura de Tiro</strong> es un colorante conocido desde la antigüedad que se usaba en artículos de lujo por su alto costo, está formado principalmente del 6,6'-dibromo-índigo; se obtiene de ciertas variedades de moluscos del Mediterráneo.</li>
-        <li>La <strong>serotonina</strong> (5-hidroxitriptamina) es de interés por su relación aparente con los procesos mentales. Se encuentra abundantemente en plantas y animales; su presencia en el cerebro y el hecho de que si su concentración normal cambia se produce un estado esquizofrénico indica que puede tener un papel importante en crear un patrón estable de actividad mental.</li>
-        <li>Muchos <strong>alcaloides</strong> contienen indol formando parte de la molécula; sus estructuras son complejas y frecuentemente tienen actividad metabólica pronunciada. Uno de ellos es la <strong>reserpina</strong>, que tiene uso clínico importante para el tratamiento de la hipertensión y como tranquilizante para las personas con disturbios emocionales. Su acción tranquilizante se cree que se debe a la reducción de la concentración de serotonina cerebral. Otros alcaloides que contienen indol son la <strong>estricnina</strong> y la <strong>brucina</strong>.</li>
-        <li>Los alcaloides del <strong>cornezuelo del centeno ("ergot")</strong> son producidos por un hongo del mismo nombre que crece como parásito en los cereales. Son amidas de un derivado del indol llamado ácido lisérgico, que en su forma levógira tiene una actividad fisiológica muy intensa en cantidades diminutas. Los cereales contaminados producen envenenamiento; esto es conocido desde hace siglos.</li>
-        <li>La <strong>dietilamida del ácido lisérgico (LSD)</strong>, aunque no ocurre en la naturaleza, ganó notoriedad como droga. Produce un estado esquizofrénico temporal y suele producir daño cerebral permanente. En 2007 se demostró que su efecto se debe a que afecta los mismos receptores de serotonina y glutamato que funcionan anormalmente en el cerebro de los esquizofrénicos.</li>
-        <li>El <strong>escatol</strong> (3-metilindol) tiene un fuerte olor a materia fecal, se forma por la digestión del triptófano y se encuentra en las heces de los mamíferos. A bajas concentraciones tiene aroma floral y se encuentra en los aceites esenciales de algunas flores, por ejemplo de flor de naranjo o jazmín.</li>
-      </ul>
-    `
+    theme: "indole",
+    content: `<p class="theory-subtitle">Sistemas bicíclicos fusionados (Benceno + Pirrol). Muchos compuestos con potente actividad psicoactiva y metabólica.</p>`,
+    compounds: [
+      { name: "Talidomida (Isoindol)", tags: ["Fármaco", "Teratogénico"], description: "Comercializado como sedante para embarazadas en los 50s; produjo anomalías congénitas severas como focomelia.", smiles: "O=C1NC(=O)CCC1N2C(=O)C3=CC=CC=C3C2=O" },
+      { name: "Triptófano e Indol natural", tags: ["Aroma", "Esencial"], description: "Presente en jazmines y flores. Forma parte del triptófano, aminoácido esencial.", smiles: "C1=CC=C2C(=C1)C=CN2" },
+      { name: "Índigo", tags: ["Colorante", "Textil"], description: "Color azul obtenido por hidrólisis de la 3-indolinona amarilla de origen vegetal.", smiles: "O=C1C(=C2NC3=CC=CC=C3C2=O)NC4=CC=CC=C14" },
+      { name: "Púrpura de Tiro", tags: ["Colorante", "Histórico"], description: "Colorante de lujo antiguo compuesto de 6,6'-dibromo-índigo, obtenido de moluscos del Mediterráneo.", smiles: "O=C1C(=C2NC3=CC(Br)=CC=C3C2=O)NC4=CC(Br)=CC=C14" },
+      { name: "Serotonina (5-HT)", tags: ["Neurotransmisor", "Biológico"], description: "Asociada a procesos mentales, estado de ánimo estable y prevención de esquizofrenia.", smiles: "NCCc1c[nH]c2ccc(O)cc12" },
+      { name: "Reserpina", tags: ["Fármaco", "Tranquilizante"], description: "Alcaloide para tratar hipertensión y problemas emocionales reduciendo serotonina cerebral.", smiles: "COC1C(CC2CN3CCC4=C(NC5=C4C=CC(=C5)OC)C3CC2C1C(=O)OC)OC(=O)C6=CC(=C(C(=C6)OC)OC)OC" },
+      { name: "Ergot (Cornezuelo)", tags: ["Tóxico", "Alcaloide"], description: "Producidos por un hongo parásito en cereales. Son derivados del ácido lisérgico que causan envenenamiento histórico.", smiles: "CN1CC2=CNC3=CC=CC(=C23)C1CC4=CNC5=CC=CC(=C45)" },
+      { name: "LSD", tags: ["Droga", "Psicoactivo"], description: "Dietilamida del ácido lisérgico. Causa un estado esquizofrénico temporal al afectar receptores de serotonina y glutamato.", smiles: "CCN(CC)C(=O)C1CN(C)C2CC3=CNC4=CC=CC(=C34)C2=C1" },
+      { name: "Escatol (3-metilindol)", tags: ["Aroma", "Metabolito"], description: "En heces huele a materia fecal, pero a bajas concentraciones tiene aroma floral (jazmín, flor de naranjo).", smiles: "CC1=CNC2=CC=CC=C12" }
+    ]
   },
   {
     id: "benzofurano",
     title: "Benzofurano y Benzotiofeno",
-    content: `
-      <h3>Compuestos de Interés</h3>
-      <p>El <strong>benzofurano</strong> se encuentra en algunos productos naturales de origen vegetal y microbiano, por ejemplo el 5-metoxifurano.</p>
-      <ul>
-        <li>Las <strong>auronas</strong>, un grupo de pigmentos flavonoides de color naranja que se encuentran en un número considerable de plantas. Un ejemplo es la <em>aureusina</em>, se encuentra en las flores de la planta "boca de dragón" (<em>Antirrhinum Majus</em>), mejor conocida en México como "perrito".</li>
-        <li>El <strong>ácido úsnico</strong>, pigmento amarillo encontrado en muchos líquenes - en particular en variedades de <em>Usnea barbata</em>, de aquí su nombre - que tiene propiedades antibióticas conocidas desde hace por lo menos un milenio en la medicina folklórica.</li>
-        <li>La <strong>griseofulvina</strong>, un antimicótico producido por el hongo <em>Penicillium Griseofulvum</em> y usado como medicamento para tratar las infecciones fúngicas de las uñas y cuero cabelludo.</li>
-      </ul>
-      <p>Entre los compuestos de interés del <strong>benzotiofeno</strong> están:</p>
-      <ul>
-        <li>El <strong>raloxifeno</strong>, un medicamento para prevenir y tratar la osteoporosis que también tiene un posible efecto positivo en el tratamiento del cáncer de senos.</li>
-        <li>El <strong>tioíndigo</strong>, colorante orgánico que da tonos de naranja, rojo, rosa y negro. Se usa en colores para acuarela de alta calidad (violeta de tioíndigo) y como un colorante de cuba para la lana, sus derivados halogenados son más resistentes al cloro y presentan un color más profundo cuando la sustitución es en C5 y C7, si es en C6 el color se hace más fuerte. Un ejemplo es el rosa brillante de indantreno R.</li>
-      </ul>
-    `
+    theme: "benzofuran",
+    content: `<p class="theory-subtitle">Sistemas bicíclicos fusionados con oxígeno o azufre.</p>`,
+    compounds: [
+      { name: "Auronas", tags: ["Pigmento", "Vegetal"], description: "Pigmentos naranjas flavonoides (ej. aureusina en la boca de dragón o 'perrito').", smiles: "O=C1C(=CC2=CC=CC=C2)OC3=CC=CC=C13" },
+      { name: "Ácido úsnico", tags: ["Pigmento", "Antibiótico"], description: "Pigmento amarillo de líquenes (Usnea barbata) con propiedades antibióticas milenarias.", smiles: "CC1=C(C(O)=C2C(=C1O)C3=C(C(=O)C(=C(O)C3=O)C(=O)C)O2)C(=O)C" },
+      { name: "Griseofulvina", tags: ["Fármaco", "Antimicótico"], description: "Producido por hongo Penicillium, usado contra infecciones fúngicas de uñas y cuero cabelludo.", smiles: "COC1=CC(=C2C(=C1)OC3(C2=O)CC(=CC(=O)C3)C)OC" },
+      { name: "Raloxifeno (Benzotiofeno)", tags: ["Fármaco", "Óseo"], description: "Previene y trata osteoporosis, con posible efecto positivo contra cáncer de mama.", smiles: "C1CN(CCO1)CCOC2=CC=C(C=C2)C(=O)C3=C(SC4=C3C=CC(=C4)O)C5=CC=C(C=C5)O" },
+      { name: "Tioíndigo", tags: ["Colorante", "Acuarela"], description: "Da tonos naranja, rojo y rosa brillante. Usado en acuarelas de alta calidad.", smiles: "O=C1C(=C2SC3=CC=CC=C3C2=O)SC4=CC=CC=C14" }
+    ]
   },
   {
     id: "piridina",
     title: "Piridina",
-    content: `
-      <h3>Compuestos de Interés</h3>
-      <ul>
-        <li><strong>Coniina.</strong> Una neurotoxina que produce parálisis muscular y es el alcaloide venenoso más importante de la cicuta. La muerte del filósofo Sócrates se debió a la ingestión de una solución de cicuta, éste era el método que se usaba en la antigua Grecia para quitar la vida a los condenados a pena de muerte.</li>
-        <li><strong>Paraquat.</strong> Un herbicida muy tóxico clasificado como arma química. A fines de la década de los 70s los Estados Unidos apoyaron su uso en México para destruir los plantíos de marihuana. Los cultivadores descubrieron que se necesitan tres días de exposición al sol para que surta efecto y empezaron a cosechar las plantas tan pronto se iban los helicópteros, guardándolas en bolsas para protegerlas del sol y -aprovechando que las hojas aparentaban ser normales- después vendieron la marihuana contaminada como si no lo estuviera. Cuando esto se detectó produjo pánico en E.U. por el riesgo a la salud de 13 millones de adictos y probablemente fue la causa de la cancelación del programa.</li>
-        <li><strong>Isoniazida.</strong> Antibiótico usado en el tratamiento de la tuberculosis.</li>
-        <li><strong>Nemertellina.</strong> Una tetrapiridina neurotóxica producida por un gusano marino.</li>
-        <li><strong>Niacina (nicotinamida).</strong> También conocida como vitamina B3. Una vitamina relacionada con el buen funcionamiento del aparato digestivo, la piel y los nervios.</li>
-        <li><strong>Nicotina.</strong> Un alcaloide tóxico del tabaco.</li>
-        <li><strong>Nicotinamida Adenin Dinucleótido (NAD).</strong> Una coenzima que permite el intercambio de electrones y H+ en los procesos de producción de energía de todas las células.</li>
-        <li><strong>Piridoxina, conocida como Vitamina B6.</strong> Vitamina que interviene en la utilización de la energía en los alimentos, la producción de eritrocitos y el funcionamiento adecuado de los nervios.</li>
-        <li><strong>Piroxicam.</strong> Un analgésico y anti-inflamatorio no esteroideo.</li>
-        <li><strong>Pralidoxima.</strong> Antídoto de emergencia para envenenamiento con pesticidas organofosforados.</li>
-        <li><strong>Sulfapiridina.</strong> Un antibiótico de la familia de las sulfonamidas. Es una de las primeras sulfas, también es conocida como sulfadiazina y su efecto se debe a que inhibe la producción de ácido fólico en la bacteria por antagonismo competitivo con una enzima.</li>
-        <li><strong>Imidacloroprid.</strong> Un insecticida neonicotinoide. A este grupo de insecticidas se les atribuye ser parte de la causa de declinación en la población de abejas y otros insectos polinizadores.</li>
-      </ul>
-    `
+    theme: "pyridine",
+    content: `<p class="theory-subtitle">Sistemas heterocíclicos de seis miembros con nitrógeno. Amplia presencia en neurotoxinas y vitaminas.</p>`,
+    compounds: [
+      { name: "Coniina", tags: ["Neurotoxina", "Veneno"], description: "Produce parálisis muscular, alcaloide venenoso de la cicuta. Causó la muerte del filósofo Sócrates.", smiles: "CCCC1CCCCN1" },
+      { name: "Paraquat", tags: ["Tóxico", "Herbicida"], description: "Herbicida clasificado como arma química. Usado en México en los 70s contra plantíos de marihuana causando un riesgo de envenenamiento masivo.", smiles: "C[N+]1=CC=C(C=C1)C2=CC=[N+](C)C=C2" },
+      { name: "Isoniazida", tags: ["Fármaco", "Antibiótico"], description: "Antibiótico usado en el tratamiento de la tuberculosis.", smiles: "O=C(NN)C1=CC=CN=C1" },
+      { name: "Nemertellina", tags: ["Neurotoxina", "Biológico"], description: "Tetrapiridina producida por un gusano marino.", smiles: "C1=CC=NC(=C1)C2=CC=NC(=C2)C3=CC=NC(=C3)C4=CC=CN=C4" },
+      { name: "Niacina (Vitamina B3)", tags: ["Vitamina", "Esencial"], description: "Relacionada con buen funcionamiento digestivo, piel y nervios.", smiles: "NC(=O)C1=CC=CN=C1" },
+      { name: "Nicotina", tags: ["Alcaloide", "Tóxico"], description: "Alcaloide tóxico principal del tabaco.", smiles: "CN1CCCC1C2=CN=CC=C2" },
+      { name: "NAD", tags: ["Coenzima", "Energía"], description: "Nicotinamida Adenin Dinucleótido. Permite el intercambio de electrones y H+ en procesos energéticos.", smiles: "NC(=O)C1=CC=C[N+](=C1)C2OC(COP(=O)(O)OP(=O)(O)OCC3OC(N4C=NC5=C4N=CN=C5N)C(O)C3O)C(O)C2O" },
+      { name: "Piridoxina (Vitamina B6)", tags: ["Vitamina", "Esencial"], description: "Interviene en metabolismo de energía y producción de eritrocitos.", smiles: "CC1=NC=C(CO)C(CO)=C1O" },
+      { name: "Piroxicam", tags: ["Fármaco", "AINEs"], description: "Analgésico y anti-inflamatorio.", smiles: "CN1C(=C(O)C2=CC=CC=C2S1(=O)=O)C(=O)NC3=CC=CC=N3" },
+      { name: "Pralidoxima", tags: ["Antídoto", "Fármaco"], description: "Antídoto para envenenamiento con pesticidas organofosforados.", smiles: "C[N+]1=CC=CC=C1C=NO" },
+      { name: "Sulfapiridina", tags: ["Fármaco", "Antibiótico"], description: "Sulfonamida que inhibe producción de ácido fólico en bacterias por antagonismo competitivo.", smiles: "NC1=CC=C(S(=O)(NC2=CC=CC=N2)=O)C=C1" },
+      { name: "Imidacloroprid", tags: ["Insecticida", "Neonicotinoide"], description: "Se le atribuye declinación en población de abejas y polinizadores.", smiles: "ClC1=CN=C(CN2C(=N[N+]([O-])=O)NCC2)C=C1" }
+    ]
   },
   {
     id: "diazinas",
-    title: "Diazinas: Pirimidina, Pirazina y Piridazina",
-    content: `
-      <h3>2.1 Pirimidina</h3>
-      <p>Los más importantes de la serie son las bases pirimídicas uracilo, timina y citosina que forman parte de los ácidos nucleicos ADN y ARN. Se han desarrollado algunos medicamentos antivirales con estructura análoga:</p>
-      <ul>
-        <li><strong>Idoxuridina</strong>, un antiviral tópico que se usa para el tratamiento del herpes en los ojos.</li>
-        <li><strong>AZT (zidovudina)</strong>, se vende bajo el nombre comercial Retrovir, para el tratamiento del SIDA.</li>
-        <li><strong>Lamivudina</strong>, para el tratamiento de la hepatitis B. También se usa contra el SIDA en combinación con otros medicamentos.</li>
-      </ul>
-
-      <h3>2.2 Productos naturales derivados de la pirazina</h3>
-      <ul>
-        <li><strong>Luciferinas</strong>, substancias encontradas en algunos insectos que producen luz como las luciérnagas. La emisión ocurre cuando la luciferina es oxidada con ayuda de la enzima luciferasa.</li>
-        <li>Algunas <strong>metoxipirazinas</strong> son componentes importantes del aroma de vegetales como chiles y pimientos del género Capsicum, los chícharos y también de algunos vinos.</li>
-        <li>Algunas feromonas de insectos son <strong>polialquilpirazinas</strong>.</li>
-        <li>Compuestos relacionados a las <strong>pirazinas</strong> son responsables del olor de la carne rostizada. Se cree que se originan de la pirólisis de los aminoácidos por el proceso de cocción.</li>
-        <li><strong>Ácido aspergílico</strong>, un compuesto producido por el <em>Aspergillus Flavus</em>.</li>
-      </ul>
-
-      <h3>2.3 Productos naturales relacionados con la piridazina</h3>
-      <p>Son muy escasos; en su forma reducida se encuentra en algunos metabolitos de hongos de la especie <em>Streptomyces</em>.</p>
-      <ul>
-        <li><strong>Piperazina.</strong> Un medicamento antihelmíntico usado contra los nemátodos intestinales, particularmente ascariasis y oxiuros.</li>
-      </ul>
-    `
+    title: "Diazinas",
+    theme: "diazine",
+    content: `<p class="theory-subtitle">Pirimidina, Pirazina y Piridazina (dos átomos de nitrógeno en el anillo).</p>`,
+    compounds: [
+      { name: "Uracilo, Timina y Citosina", tags: ["Bases", "ADN/ARN"], description: "Bases pirimídicas que forman los ácidos nucleicos.", smiles: "O=C1C=CNC(=O)N1" },
+      { name: "Idoxuridina", tags: ["Fármaco", "Antiviral"], description: "Usado tópicamente contra el herpes oftálmico.", smiles: "OC[C@H]1O[C@H](C[C@@H]1O)N2C=C(I)C(=O)NC2=O" },
+      { name: "AZT (Zidovudina) y Lamivudina", tags: ["Fármaco", "Antirretroviral"], description: "Medicamentos para el tratamiento del VIH/SIDA y Hepatitis B.", smiles: "CC1=CN(C(=O)NC1=O)[C@H]2C[C@@H](N=[N+]=[N-])[C@@H](CO)O2" },
+      { name: "Luciferinas (Pirazinas)", tags: ["Biológico", "Bioluminiscencia"], description: "Emiten luz en luciérnagas al oxidarse con la enzima luciferasa.", smiles: "O=C(O)C1N=C(SC1)C2=NC3=C(S2)C=CC(O)=C3" },
+      { name: "Metoxipirazinas", tags: ["Aroma", "Vegetal"], description: "Olor a chiles, chícharos y algunos vinos.", smiles: "COC1=NC=CN=C1" },
+      { name: "Ácido aspergílico", tags: ["Metabolito", "Tóxico"], description: "Producido por Aspergillus Flavus.", smiles: "CCC(C)C1=NC(=C(C(C)CC)N(O)C1=O)C" },
+      { name: "Piperazina (Piridazina reducida)", tags: ["Fármaco", "Antihelmíntico"], description: "Usado contra nemátodos intestinales (oxiuros, ascariasis).", smiles: "C1CNCCN1" }
+    ]
   },
   {
     id: "quinolinas",
     title: "Quinolina e Isoquinolina",
-    content: `
-      <h3>Compuestos de Interés</h3>
-      <p>La <strong>quinolina</strong> no se encuentra como tal en la naturaleza pero algunos alcaloides son derivados de ésta, así como algunos agentes quimioterapéuticos; por ejemplo la <strong>quinina</strong> es un alcaloide de la cinchona que se usa contra la malaria, el <strong>fosfato de cloroquina</strong> es una 4-aminoquinolina que tiene la misma aplicación y también es útil para el tratamiento de la amibiasis.</p>
-      
-      <p>Muchos alcaloides contienen <strong>isoquinolina</strong> y anillos reducidos de isoquinolina. Los principales son los alcaloides del <strong>opio u opiáceos como la narcotina</strong> (alcaloide del opio desprovisto de propiedades narcóticas, antitusivo), <strong>papaverina</strong> (se usa para mejorar el flujo sanguíneo en los pacientes con problemas de circulación), <strong>morfina</strong> (un analgésico clásico, aún es el más eficaz para aliviar los dolores agudos), <strong>codeína</strong> (calmante similar a la morfina, pero mucho menos potente) y varios otros. Entre los medicamentos, la <strong>emetina</strong> (principio activo de la raíz de ipecacuana) es un amebicida importante; también se llama así un alcaloide de la misma planta, que es un emético (vomitivo) potente.</p>
-    `
+    theme: "quinoline",
+    content: `<p class="theory-subtitle">Anillos aromáticos nitrogenados fusionados a anillos de benceno.</p>`,
+    compounds: [
+      { name: "Quinina", tags: ["Fármaco", "Antimalárico"], description: "Alcaloide usado contra la malaria.", smiles: "COC1=CC2=C(C=CN=C2C=C1)C(O)C3CC4CCN3CC4C=C" },
+      { name: "Fosfato de cloroquina", tags: ["Fármaco", "Antiparasitario"], description: "Usado contra malaria y amibiasis.", smiles: "CCN(CC)CCCC(C)NC1=C2C=CC(=CC2=NC=C1)Cl" },
+      { name: "Papaverina (Opiáceo)", tags: ["Fármaco", "Circulatorio"], description: "Mejora el flujo sanguíneo.", smiles: "COC1=C(C=C(C=C1)CC2=NC=CC3=CC(=C(C=C32)OC)OC)OC" },
+      { name: "Morfina (Opiáceo)", tags: ["Fármaco", "Analgésico"], description: "Alcaloide del opio, el analgésico más eficaz para dolores agudos.", smiles: "CN1CCC23C4C1CC5=C2C(=C(C=C5)O)OC3C(C=C4)O" },
+      { name: "Codeína (Opiáceo)", tags: ["Fármaco", "Antitusivo"], description: "Calmante similar a la morfina, menos potente.", smiles: "CN1CCC23C4C1CC5=C2C(=C(C=C5)OC)OC3C(C=C4)O" },
+      { name: "Emetina", tags: ["Fármaco", "Amebicida"], description: "Principio activo de ipecacuana; potente vomitivo (emético).", smiles: "CCC1CN2CCC3=CC(=C(C=C3C2CC1CC4C5=CC(=C(C=C5NC4)OC)OC)OC)OC" }
+    ]
   }
 ];

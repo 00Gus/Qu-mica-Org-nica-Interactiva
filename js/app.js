@@ -131,21 +131,52 @@
       navContainer.appendChild(link);
       
       const secDiv = document.createElement('div');
-      secDiv.className = 'theory-section';
+      secDiv.className = `theory-section theme-${section.theme}`;
       secDiv.id = `theory-${section.id}`;
       
-      secDiv.innerHTML = `
-        <h2>${section.title}</h2>
-        ${section.content}
-      `;
+      let html = `<h2>${section.title}</h2>${section.content}`;
+      
+      if (section.compounds && section.compounds.length > 0) {
+        html += `<div class="theory-grid">`;
+        section.compounds.forEach((comp, idx) => {
+          let tagsHtml = comp.tags ? comp.tags.map(t => `<span class="theory-badge">${t}</span>`).join('') : '';
+          
+          html += `
+            <div class="theory-card-premium">
+              <div class="theory-card-header">
+                <h3>${comp.name}</h3>
+                <div class="theory-tags">${tagsHtml}</div>
+              </div>
+              <div class="theory-card-body">
+                <p>${comp.description}</p>
+                ${comp.smiles ? `<div class="theory-svg-container" id="svg-${section.id}-${idx}"></div>` : ''}
+              </div>
+            </div>
+          `;
+        });
+        html += `</div>`;
+      }
+      
+      secDiv.innerHTML = html;
       contentContainer.appendChild(secDiv);
-    });
-    
-    document.querySelectorAll('.try-it-btn').forEach(btn => {
-      btn.addEventListener('click', (e) => {
-        const problemId = e.target.getAttribute('data-problem-id');
-        loadProblemById(problemId);
-      });
+      
+      // Post-render SVG con OpenChemLib
+      if (section.compounds && typeof OCL !== 'undefined') {
+        section.compounds.forEach((comp, idx) => {
+          if (comp.smiles) {
+            try {
+              const svgContainer = document.getElementById(`svg-${section.id}-${idx}`);
+              if (svgContainer) {
+                const mol = OCL.Molecule.fromSmiles(comp.smiles);
+                const svgStr = mol.toSVG(200, 150, "svg-" + idx, { autoCrop: true, suppressChiralText: true });
+                svgContainer.innerHTML = svgStr;
+              }
+            } catch (e) {
+              console.warn("No se pudo generar SVG para", comp.name, e);
+            }
+          }
+        });
+      }
     });
   }
 

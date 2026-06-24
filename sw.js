@@ -1,4 +1,4 @@
-const CACHE_NAME = 'organicca-cache-v7';
+const CACHE_NAME = 'organicca-cache-v13';
 const ASSETS = [
   './',
   './index.html',
