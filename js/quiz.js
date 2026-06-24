@@ -10,6 +10,7 @@ class Quiz {
     this.questionText = document.getElementById('quizQuestion');
     this.optionsContainer = document.getElementById('quizOptions');
     this.progressText = document.getElementById('quizProgress');
+    this.progressFill = document.getElementById('quizProgressFill');
     this.feedbackContainer = document.getElementById('quizFeedback');
     this.resultContainer = document.getElementById('quizResult');
     
@@ -55,6 +56,10 @@ class Quiz {
     const q = this.questions[this.currentQuestionIndex];
     this.questionText.textContent = q.question;
     this.progressText.textContent = `Pregunta ${this.currentQuestionIndex + 1} de ${this.totalQuestions}`;
+    if(this.progressFill) {
+      const pct = ((this.currentQuestionIndex + 1) / this.totalQuestions) * 100;
+      this.progressFill.style.width = `${pct}%`;
+    }
 
     // Map options with their original index to track correctness
     let optionsMapped = q.options.map((opt, index) => ({ text: opt, isCorrect: index === q.correctAnswer }));
@@ -94,7 +99,7 @@ class Quiz {
       <div class="feedback-alert ${isCorrect ? 'alert-success' : 'alert-danger'}">
         <strong>${isCorrect ? '¡Correcto!' : 'Incorrecto.'}</strong> ${explanation}
       </div>
-      <button id="btnNextQuiz" class="btn btn-primary mt-2">Siguiente</button>
+      <button id="btnNextQuiz" class="btn-premium" style="margin-top:1rem;">Siguiente</button>
     `;
 
     if (isCorrect) this.score++;
