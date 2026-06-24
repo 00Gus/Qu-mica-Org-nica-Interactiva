@@ -56,6 +56,10 @@
         <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"/></svg>
         Temario
       </button>
+      <button class="tab-btn" role="tab" aria-selected="false" data-view="quiz" id="tabQuiz">
+        <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"/></svg>
+        Quizz
+      </button>
     </nav>
 
     <!-- Vista de práctica -->
@@ -169,6 +173,34 @@
       <div class="catalog-grid" id="catalogGrid"></div>
     </main>
 
+    <!-- VISTA: QUIZZ -->
+    <main class="view-content" id="viewQuiz" hidden>
+      <div class="quiz-header">
+        <h2>Quizz de Evaluación QFB</h2>
+        <p>Pon a prueba tus conocimientos sobre los compuestos de interés.</p>
+      </div>
+
+      <div id="quizContainer" class="quiz-container">
+        <div class="quiz-card">
+          <div class="quiz-progress" id="quizProgress">Pregunta 1 de 10</div>
+          <h3 id="quizQuestion">¿Pregunta?</h3>
+          <div class="quiz-options" id="quizOptions">
+            <!-- Botones generados por JS -->
+          </div>
+          <div id="quizFeedback"></div>
+        </div>
+      </div>
+
+      <div id="quizResult" class="quiz-result-container" style="display: none;">
+        <div class="quiz-card result-card">
+          <h2>Resultados del Quizz</h2>
+          <div class="final-score" id="quizFinalScore">0 / 10</div>
+          <p id="quizFinalMsg" class="final-msg">¡Excelente!</p>
+          <button id="btnRestartQuiz" class="btn btn-primary">Volver a intentar</button>
+        </div>
+      </div>
+    </main>
+
     <footer class="app-footer">
       <p>Para la QFB mas guapa · Estudio de Química Orgánica · <a href="https://github.com" target="_blank" rel="noopener">GitHub Pages</a></p>
     </footer>
@@ -186,6 +218,8 @@
   <script src="js/problems.js"></script>
   <script src="js/theory.js"></script>
   <script src="js/validator.js"></script>
+  <script src="js/quiz_data.js"></script>
+  <script src="js/quiz.js"></script>
   <script src="js/app.js"></script>
   <!-- JSME debe cargarse DESPUÉS de app.js (define jsmeOnLoad) -->
   <script type="text/javascript" src="https://jsme-editor.github.io/dist/jsme/jsme.nocache.js"></script>

@@ -228,13 +228,21 @@
   }
 
   function switchView(view) {
-    document.querySelectorAll('.view').forEach(v => {
-      v.classList.remove('active');
-      v.hidden = true;
+    // Ocultar todas las vistas
+    ['viewPractice', 'viewCatalog', 'viewTheory', 'viewQuiz'].forEach(v => {
+      const el = $(v);
+      if (el) {
+        el.classList.remove('active');
+        el.hidden = true;
+      }
     });
-    document.querySelectorAll('.tab-btn').forEach(t => {
-      t.classList.remove('active');
-      t.setAttribute('aria-selected', 'false');
+    // Limpiar tabs
+    ['tabPractice', 'tabCatalog', 'tabTheory', 'tabQuiz'].forEach(t => {
+      const el = $(t);
+      if (el) {
+        el.classList.remove('active');
+        el.setAttribute('aria-selected', 'false');
+      }
     });
 
     if (view === 'practice') {
@@ -252,6 +260,14 @@
       $('viewTheory').hidden = false;
       $('tabTheory').classList.add('active');
       $('tabTheory').setAttribute('aria-selected', 'true');
+    } else if (view === 'quiz') {
+      $('viewQuiz').classList.add('active');
+      $('viewQuiz').hidden = false;
+      $('tabQuiz').classList.add('active');
+      $('tabQuiz').setAttribute('aria-selected', 'true');
+      if (window.QuizzApp && window.QuizzApp.questions.length === 0) {
+        window.QuizzApp.start();
+      }
     }
   }
 
@@ -490,6 +506,7 @@
     $('tabPractice').addEventListener('click', () => switchView('practice'));
     $('tabCatalog').addEventListener('click', () => switchView('catalog'));
     $('tabTheory').addEventListener('click', () => switchView('theory'));
+    $('tabQuiz').addEventListener('click', () => switchView('quiz'));
     $('openSidebar').addEventListener('click', openSidebar);
     $('closeSidebar').addEventListener('click', closeSidebar);
     $('sidebarOverlay').addEventListener('click', closeSidebar);

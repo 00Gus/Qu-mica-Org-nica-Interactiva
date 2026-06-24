@@ -1,4 +1,4 @@
-const CACHE_NAME = 'organicca-cache-v6';
+const CACHE_NAME = 'organicca-cache-v7';
 const ASSETS = [
   './',
   './index.html',
@@ -7,6 +7,8 @@ const ASSETS = [
   './js/problems.js',
   './js/theory.js',
   './js/validator.js',
+  './js/quiz_data.js',
+  './js/quiz.js',
   './js/app.js',
   './assets/icon.svg',
   './manifest.json',
