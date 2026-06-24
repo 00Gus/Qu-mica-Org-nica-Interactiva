@@ -54,7 +54,7 @@ class Quiz {
 
     const q = this.questions[this.currentQuestionIndex];
     this.questionText.textContent = q.question;
-    this.progressText.textContent = \`Pregunta \${this.currentQuestionIndex + 1} de \${this.totalQuestions}\`;
+    this.progressText.textContent = `Pregunta ${this.currentQuestionIndex + 1} de ${this.totalQuestions}`;
 
     // Map options with their original index to track correctness
     let optionsMapped = q.options.map((opt, index) => ({ text: opt, isCorrect: index === q.correctAnswer }));
@@ -90,12 +90,12 @@ class Quiz {
     });
 
     // Feedback
-    this.feedbackContainer.innerHTML = \`
-      <div class="feedback-alert \${isCorrect ? 'alert-success' : 'alert-danger'}">
-        <strong>\${isCorrect ? '¡Correcto!' : 'Incorrecto.'}</strong> \${explanation}
+    this.feedbackContainer.innerHTML = `
+      <div class="feedback-alert ${isCorrect ? 'alert-success' : 'alert-danger'}">
+        <strong>${isCorrect ? '¡Correcto!' : 'Incorrecto.'}</strong> ${explanation}
       </div>
       <button id="btnNextQuiz" class="btn btn-primary mt-2">Siguiente</button>
-    \`;
+    `;
 
     if (isCorrect) this.score++;
 
@@ -119,7 +119,7 @@ class Quiz {
     const msgText = document.getElementById('quizFinalMsg');
     
     const percentage = (this.score / this.totalQuestions) * 100;
-    scoreText.textContent = \`\${this.score} / \${this.totalQuestions}\`;
+    scoreText.textContent = `${this.score} / ${this.totalQuestions}`;
     
     if (percentage === 100) {
       msgText.textContent = "¡Excelente! Nivel experto en QFB.";
