@@ -874,6 +874,235 @@ const PROBLEMS = [
   
   // ─── EXAMEN FINAL (AVANZADO) ───
   {
+    id: 'examen-sintesis-metilpirrol',
+    category: 'examen',
+    type: 'reaction',
+    title: 'Síntesis: Litiación Dirigida',
+    prompt: 'Dibuja el producto principal de la siguiente secuencia de reacciones (Síntesis).',
+    context: 'A diferencia del pirrol libre (cuyo hidrógeno en el nitrógeno es el más ácido), el N-metilpirrol tiene el nitrógeno bloqueado. Por ende, una base fuerte como n-butil-litio arrancará el protón más ácido del anillo, que es el de la posición alfa (C2) debido a la estabilización inductiva del heteroátomo. Finalmente, el intermedio litiado actúa como un fuerte carbanión (nucleófilo) desplazando al yodo del yoduro de etilo (EtI) en una SN2.',
+    reactantSmiles: 'Cn1cccc1',
+    reagents: { top: '1) n-butil-Li, éter', bottom: '2) EtI' },
+    smiles: 'CCc1cccn1C',
+    acceptedSmiles: ['CCc1cccn1C', 'CCN1C(=CC=C1)C', 'CCN1C(C)=CC=C1'],
+    commonMistakes: [
+      { smiles: 'CCc1c(C)n(C)cc1', reason: 'No hay transposición de grupos. Solo adicionas el etilo en C2.' },
+      { smiles: 'CCc1cc(C)n(C)c1', reason: 'El ataque no ocurre en la posición 3 (beta).' }
+    ],
+    explanation: 'El N-metilpirrol sufre metalación directa en el C2 formando 1-metilpirrol-2-litio. El ataque SN2 posterior sobre el yoduro de etilo coloca la cadena etílica en la posición 2, formando 2-etil-1-metilpirrol.',
+    hints: ['El N ya está metilado, busca el hidrógeno más ácido del anillo (posición alfa).', 'Añade el grupo etilo (2 carbonos) en el C2.']
+  },
+  {
+    id: 'examen-sintesis-4nitropiridina',
+    category: 'examen',
+    type: 'reaction',
+    title: 'Síntesis (Secuencia): 4-Nitropiridina',
+    prompt: 'Dibuja el producto principal de la siguiente secuencia de reacciones (Síntesis).',
+    context: 'La piridina no se puede nitrar en posición 4 directamente. Para lograrlo, se oxida primero a N-óxido (que activa la posición 4 por resonancia). Luego se nitra, y finalmente se usa PCl3 o PBr3 para desoxigenar el nitrógeno y recuperar la piridina original, pero ahora nitrada en la posición deseada.',
+    reactantSmiles: 'c1ccncc1',
+    reagents: { top: '1) H₂O₂ / AcOH<br>2) HNO₃ / H₂SO₄, Calor', bottom: '3) PCl₃ (Desoxigenación)' },
+    smiles: 'O=[N+]([O-])c1ccncc1',
+    acceptedSmiles: ['O=[N+]([O-])c1ccncc1', 'O=[N+]([O-])C1=CC=NC=C1'],
+    commonMistakes: [
+      { smiles: 'O=[N+]([O-])c1cccnc1', reason: 'Si no hubieras usado el N-óxido, el ataque iría a la posición 3. Con N-óxido, el ataque es en la 4.' },
+      { smiles: 'O=[N+]([O-])c1cc[n+]([O-])cc1', reason: 'No olvides el paso 3: el PCl3 elimina el oxígeno del nitrógeno, reduciéndolo a la amina original.' }
+    ],
+    explanation: 'El H2O2 forma el N-óxido de piridina. Este se nitra en C4 formando 4-nitropiridina-N-óxido. El PCl3 reduce el N-óxido devolviendo la 4-nitropiridina.',
+    hints: ['El N-óxido dirige el electrófilo a la posición para (C4).', 'El último paso quita el oxígeno del nitrógeno.']
+  },
+  {
+    id: 'examen-sintesis-furoico',
+    category: 'examen',
+    type: 'reaction',
+    title: 'Síntesis (Secuencia): Ácido 2-Furoico',
+    prompt: 'Dibuja el producto principal de la siguiente secuencia de reacciones (Síntesis).',
+    context: 'El furano es altamente reactivo y sensible a ácidos, por lo que es mejor funcionalizarlo con bases fuertes en frío. El n-butil-litio arranca el protón alfa (C2) formando el carbanión, el cual ataca fuertemente al dióxido de carbono electrofílico. Una protonación final suave libera el ácido carboxílico.',
+    reactantSmiles: 'c1ccoc1',
+    reagents: { top: '1) n-butil-Li, éter<br>2) CO₂ (s)', bottom: '3) H₃O⁺' },
+    smiles: 'O=C(O)c1ccco1',
+    acceptedSmiles: ['O=C(O)c1ccco1', 'OC(=O)C1=CC=CO1'],
+    commonMistakes: [
+      { smiles: 'O=C(O)c1cc(C(=O)O)oc1', reason: 'Agregaste dos grupos carboxilo. El n-BuLi usualmente monolitia a menos que se use un gran exceso y más tiempo.' },
+      { smiles: 'O=C(O)c1coc[nH]1', reason: 'Este anillo no es furano.' }
+    ],
+    explanation: 'El n-butil-litio litia al furano en la posición 2. El 2-litiofurano ataca al CO2 formando un carboxilato de litio, que al acidificarse se convierte en ácido 2-furoico.',
+    hints: ['La litiación ocurre en el C2 (alfa al oxígeno).', 'El CO2 se convierte en un grupo ácido carboxílico (-COOH).']
+  },
+  {
+    id: 'examen-sintesis-escatol',
+    category: 'examen',
+    type: 'reaction',
+    title: 'Síntesis (Secuencia): Grignard en Indol',
+    prompt: 'Dibuja el producto principal de la siguiente secuencia de reacciones (Síntesis).',
+    context: 'El indol tiene un hidrógeno ácido en el nitrógeno. Al reaccionar con un reactivo de Grignard (EtMgBr), el indol se deprotona formando el indolilmagnesio. A diferencia de las sales alcalinas (Na, K) que alquilan en el nitrógeno, el enlace covalente polar N-Mg dirige el ataque de los electrófilos fuertemente hacia el C3.',
+    reactantSmiles: 'c1ccc2[nH]ccc2c1',
+    reagents: { top: '1) EtMgBr, éter', bottom: '2) CH₃I' },
+    smiles: 'Cc1c[nH]c2ccccc12',
+    acceptedSmiles: ['Cc1c[nH]c2ccccc12', 'CC1=CNC2=CC=CC=C12'],
+    commonMistakes: [
+      { smiles: 'Cn1ccc2ccccc21', reason: 'Si el alquilante ataca el nitrógeno, es porque usaste NaH o KOH. Con Grignard (Mg), el ataque ocurre en el C3 por un estado de transición cíclico.' }
+    ],
+    explanation: 'El bromuro de etilmagnesio desprotona el indol. La sal de magnesio ataca al yoduro de metilo (CH3I) por su posición más nucleofílica reactiva (C3), produciendo 3-metilindol (Escatol).',
+    hints: ['Con el reactivo de Grignard, la alquilación NO va al nitrógeno.', 'La alquilación ocurre en la posición beta (C3) del anillo pirrólico.']
+  },
+  {
+    id: 'examen-sintesis-acetilpirrol',
+    category: 'examen',
+    type: 'reaction',
+    title: 'Síntesis (Secuencia): 3-Acetilpirrol por Protección',
+    prompt: 'Dibuja el producto principal de la siguiente secuencia de reacciones (Síntesis).',
+    context: 'Normalmente, el pirrol sufre la acilación de Friedel-Crafts en la posición 2 (alfa). Si queremos el isómero en posición 3 (beta), debemos bloquear la posición 2. Esto se logra uniendo un grupo muy voluminoso al nitrógeno (como el Bencensulfonilo, PhSO2-). El enorme tamaño de este grupo hace imposible que el electrófilo se acerque a C2, obligándolo a atacar el C3. Luego se quita el protector.',
+    reactantSmiles: 'c1cc[nH]c1',
+    reagents: { top: '1) NaH, PhSO₂Cl<br>2) CH₃COCl, AlCl₃', bottom: '3) NaOH, H₂O (Desprotección)' },
+    smiles: 'CC(=O)c1cc[nH]c1',
+    acceptedSmiles: ['CC(=O)c1cc[nH]c1', 'CC(=O)C1=CNC=C1'],
+    commonMistakes: [
+      { smiles: 'CC(=O)c1ccc[nH]1', reason: 'Este es el 2-acetilpirrol. Recuerda que el grupo protector inicial obligó al electrófilo a irse a la posición 3 por repulsión estérica.' }
+    ],
+    explanation: 'El cloruro de bencensulfonilo protege el nitrógeno creando un escudo estérico. La acilación va a C3. Finalmente, la sosa cáustica (NaOH) rompe la sulfonamida liberando el 3-acetilpirrol.',
+    hints: ['El grupo fenilsulfonilo tapa la posición 2.', 'Añade el grupo acetilo en la posición 3.']
+  },
+  {
+    id: 'examen-sintesis-tiofenocarbaldehido',
+    category: 'examen',
+    type: 'reaction',
+    title: 'Síntesis (Secuencia): Intercambio Halógeno-Metal',
+    prompt: 'Dibuja el producto principal de la siguiente secuencia de reacciones (Síntesis).',
+    context: 'El intercambio halógeno-metal es extremadamente rápido a bajas temperaturas (-78°C). El butil-litio intercambia su átomo de litio por el átomo de bromo del tiofeno, generando 2-litiotiofeno. Este potente nucleófilo ataca al carbono carbonílico de la DMF (Dimetilformamida), introduciendo un grupo formilo (aldehído) tras la hidrólisis ácida.',
+    reactantSmiles: 'Brc1sccc1',
+    reagents: { top: '1) n-butil-Li, -78°C<br>2) DMF', bottom: '3) H₂O / H⁺' },
+    smiles: 'O=Cc1sccc1',
+    acceptedSmiles: ['O=Cc1sccc1', 'O=CC1=CC=CS1'],
+    commonMistakes: [
+      { smiles: 'CN(C)c1sccc1', reason: 'El carbanión ataca al carbonilo de la DMF y expulsa a la dimetilamina tras la hidrólisis, insertando un grupo aldehído (-CHO), no una amina.' }
+    ],
+    explanation: 'El intercambio produce 2-litiotiofeno, el cual ataca al carbonilo de la N,N-dimetilformamida (DMF). La hidrólisis del intermedio expulsa la dimetilamina, dando Tiofeno-2-carbaldehído.',
+    hints: ['Sustituye el Bromo por un grupo formilo (-CHO).']
+  },
+  {
+    id: 'examen-sintesis-cianopiridina',
+    category: 'examen',
+    type: 'reaction',
+    title: 'Síntesis (Secuencia): 2-Cianopiridina',
+    prompt: 'Dibuja el producto principal de la siguiente secuencia de reacciones (Síntesis).',
+    context: 'El N-óxido de piridina puede sufrir reacciones de sustitución nucleofílica si el oxígeno se activa previamente. Al usar sulfato de dimetilo, se forma una sal de N-metoxipiridinio. El ion cianuro ataca entonces la posición 2, restableciendo la aromaticidad mediante la expulsión del metanol (Reacción tipo Reissert modificada).',
+    reactantSmiles: 'O=[N+]1C=CC=CC1',
+    reagents: { top: '1) (CH₃O)₂SO₂, Calor', bottom: '2) KCN / H₂O' },
+    smiles: 'N#Cc1ccccn1',
+    acceptedSmiles: ['N#Cc1ccccn1', 'N#CC1=NC=CC=C1'],
+    commonMistakes: [
+      { smiles: 'N#Cc1ccncc1', reason: 'El ataque del cianuro en N-óxidos activados ocurre fuertemente en la posición 2 (orto), acoplado a la salida del grupo oxigenado del nitrógeno.' },
+      { smiles: 'O=[N+]([O-])c1ccccn1C#N', reason: 'El átomo de oxígeno adherido al nitrógeno actúa como grupo saliente (se elimina) durante el ataque del cianuro.' }
+    ],
+    explanation: 'El oxígeno se metila aumentando su capacidad de grupo saliente. El ion cianuro ataca en la posición 2 (adición), seguido de la pérdida de CH3OH (eliminación) para dar 2-cianopiridina.',
+    hints: ['El oxígeno desaparece del nitrógeno.', 'Un grupo ciano (-C≡N) se instala en la posición 2.']
+  },
+  {
+    id: 'examen-sintesis-fluoroquinolina',
+    category: 'examen',
+    type: 'reaction',
+    title: 'Síntesis (Secuencia): Sandmeyer en Quinolina',
+    prompt: 'Dibuja el producto principal de la siguiente secuencia de reacciones (Síntesis).',
+    context: 'La secuencia inicia con una aminación de Chichibabin, que ocurre en la posición más electrófila de la quinolina (C2). La 2-aminoquinolina resultante se somete a una diazotación a baja temperatura formando la sal de diazonio, la cual se descompone en presencia de tetrafluoroborato calentado (Reacción de Schiemann) para insertar flúor.',
+    reactantSmiles: 'c1ccc2ncccc2c1',
+    reagents: { top: '1) NaNH₂, Calor<br>2) NaNO₂, HCl, 0°C', bottom: '3) HBF₄, Calor' },
+    smiles: 'Fc1ccc2ccccc2n1',
+    acceptedSmiles: ['Fc1ccc2ccccc2n1', 'FC1=NC2=CC=CC=C2C=C1'],
+    commonMistakes: [
+      { smiles: 'Nc1ccc2ccccc2n1', reason: 'Este es el producto del paso 1. Falta diazotar y cambiar el grupo diazo por flúor (pasos 2 y 3).' },
+      { smiles: 'Fc1cnccc1c2ccccc2', reason: 'La aminación inicial ocurrió en el carbono 2 (adición nucleofílica de Chichibabin), por ende el flúor va en la posición 2.' }
+    ],
+    explanation: 'Paso 1: Chichibabin da 2-aminoquinolina. Paso 2: La amina se diazotiza a catión 2-quinolindiazonio. Paso 3: El HBF4 calienta y expulsa N2, sustituyendo por un Flúor (2-fluoroquinolina).',
+    hints: ['El reactivo entra en la posición 2 de la quinolina.', 'El producto final tiene un átomo de flúor (F).']
+  },
+  {
+    id: 'examen-sintesis-nitroanilina',
+    category: 'examen',
+    type: 'reaction',
+    title: 'Síntesis (Secuencia): p-Nitroanilina (Protección)',
+    prompt: 'Dibuja el producto principal de la siguiente secuencia de reacciones (Síntesis).',
+    context: 'Si nitramos la anilina directamente, el ácido nítrico oxida y destruye la molécula, o bien el grupo amino se protona (NH3+) volviéndose meta-orientador. Para evitarlo, protegemos temporalmente el grupo amino convirtiéndolo en una acetamida (Ac2O), que es un activador moderado orto/para. Tras la nitración mayoritariamente en para, se remueve la protección mediante hidrólisis ácida.',
+    reactantSmiles: 'Nc1ccccc1',
+    reagents: { top: '1) Anhídrido Acético<br>2) HNO₃, H₂SO₄', bottom: '3) H₂O / H⁺, Calor' },
+    smiles: 'Nc1ccc([N+](=O)[O-])cc1',
+    acceptedSmiles: ['Nc1ccc([N+](=O)[O-])cc1', 'NC1=CC=C([N+](=O)[O-])C=C1'],
+    commonMistakes: [
+      { smiles: 'CC(=O)Nc1ccc([N+](=O)[O-])cc1', reason: 'No olvides el paso 3: la hidrólisis remueve el grupo acetilo y restaura la amina libre (-NH2).' },
+      { smiles: 'Nc1cccc([N+](=O)[O-])c1', reason: 'La acetamida intermedia dirige fuertemente a orto y para (predominando para por menor impedimento estérico).' }
+    ],
+    explanation: 'Paso 1: Forma acetanilida. Paso 2: Nitración SEAr en posición para (p-nitroacetanilida). Paso 3: La hidrólisis catalizada hidroliza el enlace amida devolviendo la p-nitroanilina.',
+    hints: ['El grupo amino sobrevive intacto al final.', 'El grupo nitro (-NO₂) entra en la posición para.']
+  },
+  {
+    id: 'examen-sintesis-aminometoxipirimidina',
+    category: 'examen',
+    type: 'reaction',
+    title: 'Síntesis (Secuencia): SNAr Diferencial',
+    prompt: 'Dibuja el producto principal de la siguiente secuencia de reacciones (Síntesis).',
+    context: 'En la 2,4-dicloropirimidina, el átomo de cloro en la posición 4 es más reactivo hacia nucleófilos que el cloro en la posición 2 (ya que el intermedio aniónico en 4 se estabiliza mejor por el N lejano). Un equivalente de metóxido de sodio a 0°C (condiciones suaves) reaccionará exclusivamente en C4. Luego, el amoníaco en exceso y con calor desplazará al cloro restante en C2.',
+    reactantSmiles: 'Clc1ccnc(Cl)n1',
+    reagents: { top: '1) CH₃ONa (1 eq), 0°C', bottom: '2) NH₃ (Exceso), Calor' },
+    smiles: 'COc1cc(N)ncn1',
+    acceptedSmiles: ['COc1cc(N)ncn1', 'COC1=CC=NC(N)=N1', 'COC1=NC(N)=NC=C1'],
+    commonMistakes: [
+      { smiles: 'Nc1cc(OC)ncn1', reason: 'Los invertiste. El metóxido (paso 1 suave) ataca la posición 4 por ser más reactiva. El amoníaco (paso 2 drástico) ataca la posición 2.' }
+    ],
+    explanation: 'El metóxido (paso 1) desplaza al cloro de la posición 4 (4-metoxi-2-cloropirimidina). El amoníaco (paso 2) ataca al cloro de la posición 2 dando 2-amino-4-metoxipirimidina.',
+    hints: ['El metoxi (-OCH₃) queda en la posición 4 (arriba).', 'El grupo amino (-NH₂) queda en la posición 2 (entre los dos nitrógenos).']
+  },
+  {
+    id: 'examen-sintesis-zincke',
+    category: 'examen',
+    type: 'reaction',
+    title: 'Síntesis (Secuencia): Oxidación de Zincke',
+    prompt: 'Dibuja el producto principal de la siguiente secuencia de reacciones (Síntesis).',
+    context: 'La piridina se alquila rápidamente en el nitrógeno formando la sal de yoduro de N-metilpiridinio. Esta sal presenta una gran electrofilia en las posiciones 2 y 6. La adición de hidróxido en presencia de un oxidante suave (ferricianuro de potasio) oxida el carbono 2 transformando la molécula en una piridona.',
+    reactantSmiles: 'c1ccncc1',
+    reagents: { top: '1) CH₃I (Exceso)', bottom: '2) NaOH / K₃Fe(CN)₆' },
+    smiles: 'Cn1ccccc1=O',
+    acceptedSmiles: ['Cn1ccccc1=O', 'CN1C=CC=CC1=O'],
+    commonMistakes: [
+      { smiles: 'O=c1cc[nH]cc1', reason: 'El yoduro de metilo (paso 1) alquiló permanentemente el nitrógeno. El producto debe conservar el grupo metilo (N-metilpiridona).' },
+      { smiles: 'Cn1ccc(=O)cc1', reason: 'La oxidación con ferricianuro (Zincke) ocurre en la posición 2, no en la 4.' }
+    ],
+    explanation: 'Paso 1: N-metilación (Sal de Zincke). Paso 2: Adición de OH- en la posición 2 seguida de oxidación de la seudobase carbinolamina para producir 1-metilpiridin-2-ona.',
+    hints: ['El nitrógeno tiene un grupo metilo (-CH₃).', 'Hay un grupo cetona (=O) en la posición 2 (contiguo al nitrógeno).']
+  },
+  {
+    id: 'examen-sintesis-nitroindol',
+    category: 'examen',
+    type: 'reaction',
+    title: 'Síntesis (Secuencia): 3-Nitroindol (Protección)',
+    prompt: 'Dibuja el producto principal de la siguiente secuencia de reacciones (Síntesis).',
+    context: 'Si se nitra el indol directamente, se oxida violentamente y polimeriza. Para nitrarlo limpiamente, primero se desprotona con NaH y se le añade un grupo tosilato (TsCl) al nitrógeno. A diferencia del pirrol, la posición 3 del indol es tan preferida que incluso con el grupo protector voluminoso en N, la SEAr sigue ocurriendo en C3. Luego se desprotege hidrolizando.',
+    reactantSmiles: 'c1ccc2[nH]ccc2c1',
+    reagents: { top: '1) NaH, TsCl<br>2) HNO₃, Ac₂O', bottom: '3) NaOH / EtOH' },
+    smiles: 'O=[N+]([O-])c1c[nH]c2ccccc12',
+    acceptedSmiles: ['O=[N+]([O-])c1c[nH]c2ccccc12', 'O=[N+]([O-])C1=CNC2=CC=CC=C12'],
+    commonMistakes: [
+      { smiles: 'O=[N+]([O-])c1cc2ccccc2[nH]1', reason: 'A diferencia del pirrol bloqueado, el indol SIEMPRE ataca en C3 si está disponible para evitar romper el anillo bencénico.' }
+    ],
+    explanation: 'Paso 1: N-Tosilación. Paso 2: Nitración suave en C3 (1-tosil-3-nitroindol). Paso 3: El NaOH en etanol caliente rompe la sulfonamida liberando 3-nitroindol.',
+    hints: ['Nitra la posición beta (C3) del anillo pirrólico.', 'El grupo protector se elimina al final, dejando el N-H libre.']
+  },
+  {
+    id: 'examen-sintesis-isoquinolincarboxilico',
+    category: 'examen',
+    type: 'reaction',
+    title: 'Síntesis (Secuencia): Aromatización y Oxidación',
+    prompt: 'Dibuja el producto principal de la siguiente secuencia de reacciones (Síntesis).',
+    context: 'La 1-metil-3,4-dihidroisoquinolina es una dihidro-isoquinolina parcialmente saturada. Al calentarla fuertemente con Paladio sobre Carbono (Pd/C) cede sus hidrógenos, aromatizándose a 1-metilisoquinolina. Finalmente, un oxidante drástico como el KMnO₄ en ebullición convierte la cadena lateral alquílica (metilo) directamente en un ácido carboxílico.',
+    reactantSmiles: 'CC1=NCCH2C2=CC=CC=C12',
+    reagents: { top: '1) Pd/C, 200°C', bottom: '2) KMnO₄, Calor' },
+    smiles: 'O=C(O)c1nccc2ccccc12',
+    acceptedSmiles: ['O=C(O)c1nccc2ccccc12', 'OC(=O)C1=NC=CC2=CC=CC=C12'],
+    commonMistakes: [
+      { smiles: 'Cc1nccc2ccccc12', reason: 'Este es el producto intermedio (Paso 1). El permanganato oxidará el grupo metilo hasta ácido.' },
+      { smiles: 'O=C(O)C1=NCCH2C2=CC=CC=C12', reason: 'Te saltaste el primer paso de aromatización (Pd/C remueve los hidrógenos del anillo saturado).' }
+    ],
+    explanation: 'Paso 1: Deshidrogenación catalítica aromatiza el anillo formando 1-metilisoquinolina. Paso 2: El KMnO4 oxida el metilo a un grupo carboxilo, formando ácido isoquinolina-1-carboxílico.',
+    hints: ['Forma el sistema bicíclico totalmente aromático (Isoquinolina).', 'El grupo metilo en la posición 1 se oxida a un ácido carboxílico (-COOH).']
+  },
+  {
     id: 'examen-identificacion-furano',
     category: 'examen',
     type: 'identify',
