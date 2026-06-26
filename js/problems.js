@@ -62,6 +62,12 @@ const CATEGORIES = {
     name: 'Quinolina e isoquinolina',
     description: 'Alcaloides y agentes quimioterapéuticos.',
     color: '#22c55e'
+  },
+  examen: {
+    id: 'examen',
+    name: 'Examen Final (Avanzado)',
+    description: 'Retos de nivel universitario con renderizado de reactivos y reacciones en varios pasos.',
+    color: '#0f172a'
   }
 };
 
@@ -864,6 +870,646 @@ const PROBLEMS = [
     commonMistakes: [],
     explanation: 'La morfina se basa en un esqueleto de isoquinolina fusionado con otros anillos. Como primer paso, reconoce la isoquinolina.',
     hints: ['Empieza por isoquinolina.', 'El alcaloide tiene N básico.']
+  },
+  
+  // ─── EXAMEN FINAL (AVANZADO) ───
+  {
+    id: 'examen-identificacion-furano',
+    category: 'examen',
+    type: 'identify',
+    title: 'Nomenclatura avanzada multicentro',
+    prompt: 'Dibuja el <strong>3-bromo-5-cloro-2-metiltetrahidrofurano</strong> (ignora estereoquímica).',
+    context: 'El tetrahidrofurano es un éter cíclico de cinco miembros (completamente saturado). Según las reglas de nomenclatura de Hantzsch-Widman, el heteroátomo (oxígeno) tiene la máxima prioridad y se le asigna la posición 1. La numeración del anillo debe continuar en la dirección que otorgue los localizadores más bajos posibles al conjunto de sustituyentes (bromo, cloro y metilo).',
+    smiles: 'CC1OC(Cl)CC1Br',
+    acceptedSmiles: ['CC1OC(Cl)CC1Br', 'ClC1CCC(Br)C(C)O1'],
+    commonMistakes: [
+      { smiles: 'CC1OC(Br)CC1Cl', reason: 'Intercambiaste el bromo y el cloro. Revisa la numeración: el bromo va en 3 y el cloro en 5.' }
+    ],
+    explanation: 'El oxígeno es el átomo 1. El metilo está en la posición 2, el bromo en la 3, y el cloro en la 5 del anillo de tetrahidrofurano.',
+    hints: ['El oxígeno es la posición 1.', 'Numera buscando los índices más bajos posibles para los sustituyentes.']
+  },
+  {
+    id: 'examen-sulfonacion-piridina',
+    category: 'examen',
+    type: 'reaction',
+    title: 'Sulfonación extrema de Piridina',
+    prompt: 'Dibuja el producto principal de la siguiente reacción.',
+    context: 'La piridina es un anillo aromático altamente deficiente en electrones. Además, en medios fuertemente ácidos, el nitrógeno se protona formando el ion piridinio, desactivando el anillo aún más. Por esta razón, las reacciones de Sustitución Electrofílica Aromática (SEAr) como la sulfonación requieren condiciones drásticas (220°C) y proceden exclusivamente en la posición meta (C3), la posición menos desfavorecida por la carga positiva del intermediario.',
+    reactantSmiles: 'c1ccncc1',
+    reagents: { top: 'SO₃ / H₂SO₄, HgSO₄', bottom: '220°C, 24 hrs' },
+    smiles: 'O=S(=O)(O)c1cccnc1',
+    acceptedSmiles: ['O=S(=O)(O)c1cccnc1', 'O=S(=O)(O)C1=CC=CN=C1'],
+    commonMistakes: [
+      { smiles: 'O=S(=O)(O)c1ccccn1', reason: 'Sustituiste en C2 (orto). La piridina dirige a meta (C3).' },
+      { smiles: 'O=S(=O)(O)c1ccnccc1', reason: 'Sustituiste en C4 (para). La piridina dirige a meta (C3).' }
+    ],
+    explanation: 'La piridina sufre sustitución electrofílica aromática (SEAr) en la posición 3 (meta) porque los intermediarios formados por ataque en orto y para son altamente inestables.',
+    hints: ['La piridina es fuertemente desactivadora.', 'El ataque electrofílico ocurre predominantemente en la posición meta (C3).']
+  },
+  {
+    id: 'examen-alquilacion-pirrol',
+    category: 'examen',
+    type: 'reaction',
+    title: 'N-Alquilación en medio básico',
+    prompt: 'Dibuja el producto principal de la siguiente reacción secuencial.',
+    context: 'El pirrol posee un protón (N-H) que es excepcionalmente ácido para una amina (pKa ~ 16.5) debido a que el anión pirroluro resultante mantiene la aromaticidad. El n-butil-litio desprotona cuantitativamente al nitrógeno. Al añadir luego yoduro de etilo, el pirroluro actúa como un excelente nucleófilo, atacando mediante un mecanismo SN2 casi exclusivamente por el átomo de nitrógeno para formar el producto N-alquilado.',
+    reactantSmiles: 'c1cc[nH]c1',
+    reagents: { top: '1) n-butil-Li, éter', bottom: '2) EtI' },
+    smiles: 'CCn1cccc1',
+    acceptedSmiles: ['CCn1cccc1', 'CCN1C=CC=C1'],
+    commonMistakes: [
+      { smiles: 'CCc1ccc[nH]1', reason: 'Alquilaste el carbono 2. En un medio básico tan fuerte se forma el anión pirroluro y el ataque SN2 procede desde el nitrógeno.' },
+      { smiles: 'CCc1c[nH]cc1', reason: 'Alquilaste el carbono 3. La alquilación ocurre en el nitrógeno.' }
+    ],
+    explanation: 'El n-BuLi arranca el protón ácido del nitrógeno formando pirroluro de litio. El anión resultante sufre un ataque nucleofílico SN2 sobre el yoduro de etilo, formando N-etilpirrol.',
+    hints: ['¿Qué protón es el más ácido en el pirrol?', 'El anión ataca al yoduro de etilo a través del nitrógeno.']
+  },
+  {
+    id: 'examen-nitracion-fenol',
+    category: 'examen',
+    type: 'reaction',
+    title: 'SEAr en anillos fuertemente activados',
+    prompt: 'Dibuja el producto principal <strong>para</strong>-sustituido de esta reacción.',
+    context: 'El grupo hidroxilo (-OH) es un sustituyente fuertemente activador del anillo bencénico debido al efecto mesomérico donador (+M) de los pares de electrones libres del oxígeno. Esta resonancia estabiliza excepcionalmente los intermediarios (complejos sigma) que se forman cuando el ataque ocurre en posiciones orto y para. Como resultado, el fenol reacciona casi de inmediato para dar isómeros orto y para (el isómero para suele favorecerse por menor impedimento estérico).',
+    reactantSmiles: 'Oc1ccccc1',
+    reagents: { top: 'HNO₃, H₂SO₄', bottom: 'Temperatura ambiente' },
+    smiles: 'O=[N+]([O-])c1ccc(O)cc1',
+    acceptedSmiles: ['Oc1ccc([N+](=O)[O-])cc1', 'O=[N+]([O-])C1=CC=C(O)C=C1'],
+    commonMistakes: [
+      { smiles: 'O=[N+]([O-])c1cccc(O)c1', reason: 'Nitraste en meta. El grupo -OH dirige a orto y para.' },
+      { smiles: 'O=C1C=CC(=O)C=C1', reason: 'Dibujaste benzoquinona. Esta reacción es una nitración (SEAr), no una oxidación.' }
+    ],
+    explanation: 'El fenol se nitra con muchísima facilidad formando una mezcla de isómeros orto y para-nitrofenol. En este caso se solicitó el producto para.',
+    hints: ['El -OH es un grupo activador fuerte orientador a orto/para.', 'El electrófilo es el ion nitronio (NO₂⁺).']
+  },
+  {
+    id: 'examen-vilsmeier',
+    category: 'examen',
+    type: 'reaction',
+    title: 'Reacción de Vilsmeier-Haack',
+    prompt: 'Dibuja el producto principal de la reacción de formilación del pirrol.',
+    context: 'La reacción de Vilsmeier-Haack es una formilación exclusiva para sustratos aromáticos ricos en electrones (como pirrol o indol). El reactivo electrofílico activo (ion clorometileniminio) se genera in situ al mezclar POCl₃ y DMF. Debido a que el pirrol dona densidad electrónica de manera más efectiva desde su posición alfa, el ataque ocurre preferentemente en C2. Tras la hidrólisis, se revela un aldehído (-CHO).',
+    reactantSmiles: 'c1cc[nH]c1',
+    reagents: { top: '1) POCl₃ / DMF', bottom: '2) H₂O' },
+    smiles: 'O=Cc1ccc[nH]1',
+    acceptedSmiles: ['O=Cc1ccc[nH]1', 'O=CC1=CC=CN1'],
+    commonMistakes: [
+      { smiles: 'O=Cn1cccc1', reason: 'La formilación Vilsmeier-Haack ocurre en el carbono alfa (C2), no en el nitrógeno.' }
+    ],
+    explanation: 'La reacción introduce de forma altamente regioselectiva un grupo formilo (-CHO) en la posición más reactiva del pirrol (C2), formando pirrol-2-carbaldehído.',
+    hints: ['El complejo de Vilsmeier transfiere un grupo aldehído (-CHO).', 'La posición más reactiva del pirrol es la alfa (C2).']
+  },
+  {
+    id: 'examen-snar',
+    category: 'examen',
+    type: 'reaction',
+    title: 'Sustitución Nucleofílica Aromática (SNAr)',
+    prompt: 'Dibuja el producto principal de esta reacción.',
+    context: 'A diferencia del benceno, anillos deficientes en electrones como la piridina son excelentes sustratos para la Sustitución Nucleofílica Aromática (SNAr) por adición-eliminación. Si hay un buen grupo saliente en posición orto o para respecto al nitrógeno, el ataque de un nucleófilo fuerte forma un intermediario de Meisenheimer óptimamente estabilizado (la carga negativa se deslocaliza directamente sobre el nitrógeno).',
+    reactantSmiles: 'Clc1ccccn1',
+    reagents: { top: 'NaOCH₃, CH₃OH', bottom: 'Calor' },
+    smiles: 'COc1ccccn1',
+    acceptedSmiles: ['COc1ccccn1', 'COC1=CC=CC=N1'],
+    commonMistakes: [
+      { smiles: 'c1ccncc1', reason: 'Solo eliminaste el cloro. El grupo metóxido (-OCH₃) sustituye al átomo de cloro.' },
+      { smiles: 'COc1ccc(Cl)cn1', reason: 'El ataque ocurre en C2, sustituyendo al halógeno.' }
+    ],
+    explanation: 'El ion metóxido ataca el carbono 2 desplazando al cloruro a través de un intermediario estabilizado por la electronegatividad del nitrógeno (SNAr).',
+    hints: ['El átomo de cloro es un grupo saliente.', 'El ion metóxido (-OCH₃) es el nucleófilo atacante.']
+  },
+  {
+    id: 'examen-oxidacion-picolina',
+    category: 'examen',
+    type: 'reaction',
+    title: 'Síntesis de Niacina (Oxidación enérgica)',
+    prompt: 'Dibuja el producto principal resultante de la oxidación exhaustiva.',
+    context: 'El anillo de piridina carece de la densidad electrónica necesaria para ser oxidado, volviéndolo casi inerte frente al permanganato de potasio (KMnO₄). Sin embargo, las cadenas laterales (como el grupo metilo) son susceptibles a la oxidación enérgica. Durante el reflujo con KMnO₄, el carbono "bencílico" se oxida exhaustivamente hasta el máximo estado de oxidación, transformando todo el grupo en un ácido carboxílico.',
+    reactantSmiles: 'Cc1cccnc1',
+    reagents: { top: 'KMnO₄, H₂O', bottom: 'Calor, Reflujo' },
+    smiles: 'O=C(O)c1cccnc1',
+    acceptedSmiles: ['O=C(O)c1cccnc1', 'OC(=O)C1=CC=CN=C1'],
+    commonMistakes: [
+      { smiles: 'Cc1cccnc1', reason: 'La molécula reacciona, la oxidación ocurre sobre el grupo metilo.' },
+      { smiles: 'CC(=O)c1cccnc1', reason: 'Es una oxidación exhaustiva. El carbono terminal se oxida hasta ácido carboxílico.' }
+    ],
+    explanation: 'La 3-metilpiridina (β-picolina) se oxida a ácido piridin-3-carboxílico (niacina o vitamina B3). El anillo de piridina permanece intacto.',
+    hints: ['El grupo metilo (-CH₃) se oxida completamente a grupo carboxilo (-COOH).', 'El anillo de piridina sobrevive.']
+  },
+  {
+    id: 'examen-n-oxido',
+    category: 'examen',
+    type: 'reaction',
+    title: 'N-oxidación de Piridina',
+    prompt: 'Dibuja el producto de la oxidación de la piridina.',
+    context: 'El peróxido de hidrógeno en ácido acético u otros perácidos orgánicos oxidan el par libre del nitrógeno de la piridina para formar un N-óxido, el cual invierte las propiedades de activación del anillo.',
+    reactantSmiles: 'c1ccncc1',
+    reagents: { top: 'H₂O₂ / CH₃COOH', bottom: 'Calor' },
+    smiles: '[O-][n+]1ccccc1',
+    acceptedSmiles: ['[O-][n+]1ccccc1', '[n+]1([O-])ccccc1', 'O=[N]1C=CC=CC1'],
+    commonMistakes: [
+      { smiles: 'Oc1ccccn1', reason: 'La oxidación ocurre sobre el par libre del nitrógeno, no insertando un hidroxilo en el anillo.' }
+    ],
+    explanation: 'El agente oxidante transfiere un oxígeno al par de electrones no enlazantes del nitrógeno, creando el N-óxido de piridina con separación de cargas (+ en el N, - en el O).',
+    hints: ['El par libre del nitrógeno ataca al oxígeno peróxido.']
+  },
+  {
+    id: 'examen-nitracion-noxido',
+    category: 'examen',
+    type: 'reaction',
+    title: 'Nitración del N-óxido de Piridina',
+    prompt: 'Dibuja el producto principal (regioselectivo) de la nitración.',
+    context: 'A diferencia de la piridina (que orienta a meta y requiere 300°C), el N-óxido de piridina tiene un oxígeno que dona densidad electrónica al anillo por resonancia (+M).',
+    reactantSmiles: '[O-][n+]1ccccc1',
+    reagents: { top: 'HNO₃, H₂SO₄', bottom: '90°C' },
+    smiles: '[O-][n+]1ccc(cc1)[N+](=O)[O-]',
+    acceptedSmiles: ['[O-][n+]1ccc(cc1)[N+](=O)[O-]', '[O-][n+]1ccc(cc1)N(=O)=O'],
+    commonMistakes: [
+      { smiles: 'O=[N+]([O-])c1cccc[n+]1[O-]', reason: 'Sustituiste en posición meta. El efecto resonante donador del oxígeno en el N-óxido favorece fuertemente las posiciones orto y para, siendo para la mayoritaria por efecto estérico.' }
+    ],
+    explanation: 'El oxígeno del N-óxido estabiliza el complejo de Meisenheimer catiónico (intermediario) cuando el electrófilo ataca en C2 o C4. El ataque en C4 (para) está favorecido cinéticamente y termodinámicamente.',
+    hints: ['El oxígeno es activador orto/para.', 'Dibuja el producto en la posición C4.']
+  },
+  {
+    id: 'examen-chichibabin',
+    category: 'examen',
+    type: 'reaction',
+    title: 'Aminación de Chichibabin',
+    prompt: 'Dibuja el producto de esta sustitución nucleofílica.',
+    context: 'El ion amiduro (NH₂⁻) es un nucleófilo muy fuerte. Ataca al carbono deficiente en electrones adyacente al nitrógeno piridínico con desprendimiento de un ion hidruro.',
+    reactantSmiles: 'c1ccncc1',
+    reagents: { top: 'NaNH₂', bottom: 'NH₃ (liq), 100°C' },
+    smiles: 'Nc1ccccn1',
+    acceptedSmiles: ['Nc1ccccn1', 'NC1=CC=CC=N1'],
+    commonMistakes: [
+      { smiles: 'Nc1ccncc1', reason: 'El ataque ocurre en C2 o C6 (orto al N) por ser las posiciones más deficientes en electrones.' }
+    ],
+    explanation: 'El ion amiduro ataca el carbono 2. La pérdida de hidruro aromático es termodinámicamente difícil, por lo que requiere alta temperatura, formando finalmente 2-aminopiridina.',
+    hints: ['Sustitución Nucleofílica en C2.', 'El grupo entrante es una amina (-NH₂).']
+  },
+  {
+    id: 'examen-n-buli-piridina',
+    category: 'examen',
+    type: 'reaction',
+    title: 'Alquilación Nucleofílica',
+    prompt: 'Dibuja el producto de la reacción con este reactivo organolítico.',
+    context: 'Similar al ataque del amiduro, un carbanión muy reactivo (n-BuLi) puede atacar al anillo de piridina a baja temperatura.',
+    reactantSmiles: 'c1ccncc1',
+    reagents: { top: '1) n-BuLi, hexano', bottom: '2) Calor (Eliminación de LiH)' },
+    smiles: 'CCCCc1ccccn1',
+    acceptedSmiles: ['CCCCc1ccccn1', 'CCCCC1=CC=CC=N1'],
+    commonMistakes: [
+      { smiles: 'CCCCc1ccncc1', reason: 'El ataque ocurre regioselectivamente en C2 debido al efecto atractor de electrones y coordinación con el nitrógeno.' }
+    ],
+    explanation: 'El n-butil litio adiciona su grupo butilo en el carbono 2. Tras calentar, se elimina hidruro de litio restaurando la aromaticidad para dar 2-butilpiridina.',
+    hints: ['Ataque del grupo butilo al carbono alfa.', 'Dibuja una cadena de 4 carbonos unida a la posición 2.']
+  },
+  {
+    id: 'examen-reduccion-piridina',
+    category: 'examen',
+    type: 'reaction',
+    title: 'Reducción Catalítica Extrema',
+    prompt: 'Dibuja el producto principal resultante de la reducción.',
+    context: 'A diferencia de anillos carboxílicos muy estables, los heteroaromáticos con H2 a alta presión y platino o rodio pierden su aromaticidad completamente.',
+    reactantSmiles: 'c1ccncc1',
+    reagents: { top: 'H₂, Pt', bottom: 'Alta Presión' },
+    smiles: 'C1CCNCC1',
+    acceptedSmiles: ['C1CCNCC1'],
+    commonMistakes: [
+      { smiles: 'c1ccncc1', reason: 'La molécula reacciona, se reducen los 3 dobles enlaces.' },
+      { smiles: 'C1=CCNCC1', reason: 'Reducción parcial. Con catalizadores de Platino y alta presión se satura por completo.' }
+    ],
+    explanation: 'Los 3 dobles enlaces se hidrogenan, transformando el anillo aromático de piridina en su análogo cicloalifático: la piperidina.',
+    hints: ['Elimina todos los dobles enlaces.', 'El anillo se vuelve una amina cíclica saturada.']
+  },
+  {
+    id: 'examen-suzuki',
+    category: 'examen',
+    type: 'reaction',
+    title: 'Acoplamiento cruzado de Suzuki',
+    prompt: 'Dibuja el producto del acoplamiento.',
+    context: 'El paladio cataliza el acoplamiento entre un halogenuro de arilo (bromopiridina) y un ácido borónico.',
+    reactantSmiles: 'Brc1ccccn1',
+    reagents: { top: 'Ph-B(OH)₂, Pd(PPh₃)₄', bottom: 'Na₂CO₃, H₂O/Tol' },
+    smiles: 'c1ccc(cc1)c2ccccn2',
+    acceptedSmiles: ['c1ccc(cc1)c2ccccn2', 'C1=CC=C(C2=CC=CC=N2)C=C1'],
+    commonMistakes: [
+      { smiles: 'Brc1ccc(c2ccccc2)cn1', reason: 'El ácido borónico ataca y sustituye al átomo de bromo por el grupo fenilo.' }
+    ],
+    explanation: 'El ciclo catalítico del Paladio(0) incluye adición oxidativa en el enlace C-Br, transmetalación con el fenilborónico y eliminación reductiva, acoplando ambos anillos.',
+    hints: ['Sustituye el Bromo por un anillo de benceno (Fenilo).']
+  },
+  {
+    id: 'examen-snar-4',
+    category: 'examen',
+    type: 'reaction',
+    title: 'SNAr en posición Para',
+    prompt: 'Dibuja el producto de sustitución nucleofílica.',
+    context: 'La posición 4 (para) de la piridina está fuertemente activada hacia el ataque nucleofílico, tanto como la posición 2.',
+    reactantSmiles: 'Clc1ccncc1',
+    reagents: { top: 'NaOCH₃, CH₃OH', bottom: 'Calor' },
+    smiles: 'COc1ccncc1',
+    acceptedSmiles: ['COc1ccncc1', 'COC1=CC=CN=C1'],
+    commonMistakes: [
+      { smiles: 'Clc1cc(OC)ccn1', reason: 'El mecanismo procede por Adición-Eliminación sobre el átomo de carbono que posee el grupo saliente (-Cl).' }
+    ],
+    explanation: 'El metóxido ataca en el C4 desplazando al cloruro. El intermediario aniónico está estabilizado por resonancia porque la carga deslocaliza hacia el nitrógeno.',
+    hints: ['Cambia el cloro por el grupo metóxido.']
+  },
+  {
+    id: 'examen-hantzsch-oxidacion',
+    category: 'examen',
+    type: 'reaction',
+    title: 'Reacción de Hantzsch (Paso final)',
+    prompt: 'Dibuja el producto de oxidación final.',
+    context: 'La síntesis de Hantzsch ensambla una 1,4-dihidropiridina. El paso final para obtener el anillo totalmente aromático requiere el uso de un agente oxidante fuerte.',
+    reactantSmiles: 'CC1=C(C(=O)OCC)C(C)C(C(=O)OCC)=C(C)N1',
+    reagents: { top: 'HNO₃', bottom: 'Oxidación' },
+    smiles: 'CCOC(=O)c1c(C)nc(C)c(C(=O)OCC)c1C',
+    acceptedSmiles: ['CCOC(=O)c1c(C)nc(C)c(C(=O)OCC)c1C'],
+    commonMistakes: [
+      { smiles: 'CC1=C(C(=O)OCC)C(C)C(C(=O)OCC)=C(C)N1', reason: 'Debes oxidar el anillo eliminando dos hidrógenos (uno del N y otro del C4) para instaurar el sistema pi aromático completo.' }
+    ],
+    explanation: 'El ácido nítrico u otros oxidantes (ej. CAN o DDQ) arrancan un protón y un hidruro de la dihidropiridina, formando un anillo aromático altamente estable.',
+    hints: ['Convierte el anillo central saturado en un anillo de piridina aromático.', 'Mantén todos los grupos alquilo y ésteres.']
+  },
+  {
+    id: 'examen-mannich-pirrol',
+    category: 'examen',
+    type: 'reaction',
+    title: 'Reacción de Mannich',
+    prompt: 'Dibuja el producto de esta alquilación aminometílica.',
+    context: 'Un anillo muy nucleofílico como el pirrol puede reaccionar con el ion iminio derivado de formaldehído y dimetilamina.',
+    reactantSmiles: 'c1cc[nH]c1',
+    reagents: { top: 'CH₂O, HN(CH₃)₂', bottom: 'H⁺, Calor' },
+    smiles: 'CN(C)Cc1ccc[nH]1',
+    acceptedSmiles: ['CN(C)Cc1ccc[nH]1', 'CN(C)CC1=CC=CN1'],
+    commonMistakes: [
+      { smiles: 'CN(C)Cc1c[nH]cc1', reason: 'El ataque electrófilo ocurre preferentemente en la posición 2 del pirrol, no en la 3.' },
+      { smiles: 'CN(C)C[nH]1cccc1', reason: 'El medio es ácido. El pirrol no se desprotona para reaccionar en el nitrógeno; reacciona a través de sus carbonos aromáticos.' }
+    ],
+    explanation: 'El formaldehído y la dimetilamina reaccionan en medio ácido formando un ion iminio electrofílico (CH₂=N⁺Me₂). Este ataca a la posición C2 del pirrol.',
+    hints: ['Añade un grupo -CH₂-N(CH₃)₂ a la posición 2 del pirrol.']
+  },
+  {
+    id: 'examen-friedel-crafts-furano',
+    category: 'examen',
+    type: 'reaction',
+    title: 'Acilación de Friedel-Crafts',
+    prompt: 'Dibuja el producto regioselectivo de esta acilación.',
+    context: 'El furano es rico en electrones pero muy sensible a ácidos fuertes (polimeriza). Por tanto, se usa un catalizador suave como BF3 en lugar de AlCl3.',
+    reactantSmiles: 'c1ccoc1',
+    reagents: { top: '(CH₃CO)₂O', bottom: 'BF₃, éter' },
+    smiles: 'CC(=O)c1ccco1',
+    acceptedSmiles: ['CC(=O)c1ccco1', 'CC(=O)C1=CC=CO1'],
+    commonMistakes: [
+      { smiles: 'CC(=O)c1ccoc1', reason: 'Sustituiste en la posición 3. El furano dirige de forma aplastante hacia las posiciones alfa (C2).' }
+    ],
+    explanation: 'El oxígeno estabiliza excepcionalmente el catión intermediario resultante del ataque en C2 por resonancia completa, favoreciendo abrumadoramente el 2-acetilfurano.',
+    hints: ['Añade un grupo acetilo (-COCH₃) en la posición alfa (C2).']
+  },
+  {
+    id: 'examen-nitracion-suave-pirrol',
+    category: 'examen',
+    type: 'reaction',
+    title: 'Nitración Suave (Sin Ácidos Fuertes)',
+    prompt: 'Dibuja el producto de la nitración del pirrol.',
+    context: 'El pirrol no resiste mezclas sulfonítricas (se quema/polimeriza). Para nitrarlo se usa un agente nitrante neutro como el nitrato de acetilo.',
+    reactantSmiles: 'c1cc[nH]c1',
+    reagents: { top: 'CH₃COONO₂', bottom: 'Ac₂O, -10°C' },
+    smiles: 'O=[N+]([O-])c1ccc[nH]1',
+    acceptedSmiles: ['O=[N+]([O-])c1ccc[nH]1', 'O=[N+]([O-])C1=CC=CN1'],
+    commonMistakes: [
+      { smiles: 'O=[N+]([O-])n1cccc1', reason: 'La nitración no ocurre en el nitrógeno (N-nitración), sino en los carbonos más reactivos del anillo.' }
+    ],
+    explanation: 'El nitrato de acetilo libera lentamente iones nitronio (NO₂⁺) en un ambiente no corrosivo, permitiendo la nitración segura del pirrol en la posición C2.',
+    hints: ['Sustituye en la posición alfa (C2) con un grupo nitro (-NO₂).']
+  },
+  {
+    id: 'examen-bromacion-exhaustiva',
+    category: 'examen',
+    type: 'reaction',
+    title: 'Halogenación Exhaustiva',
+    prompt: 'Dibuja el producto orgánico formado con exceso de bromo.',
+    context: 'El pirrol es tan exageradamente reactivo que frente al Bromo elemental (sin siquiera catalizador de Lewis) reacciona de forma múltiple.',
+    reactantSmiles: 'c1cc[nH]c1',
+    reagents: { top: 'Br₂ (Exceso)', bottom: 'Etanol, 0°C' },
+    smiles: 'Brc1c(Br)c(Br)c(Br)[nH]1',
+    acceptedSmiles: ['Brc1c(Br)c(Br)c(Br)[nH]1'],
+    commonMistakes: [
+      { smiles: 'Brc1ccc[nH]1', reason: 'Solo monobromaste. Con exceso de bromo, las cuatro posiciones del anillo se halógenan rápidamente.' }
+    ],
+    explanation: 'El anillo de pirrol tiene una densidad electrónica inmensa. En presencia de exceso de bromo se forman los cuatro enlaces C-Br posibles, generando 2,3,4,5-tetrabromopirrol.',
+    hints: ['Sustituye todos los hidrógenos del carbono aromático con bromo.']
+  },
+  {
+    id: 'examen-diels-alder',
+    category: 'examen',
+    type: 'reaction',
+    title: 'Cicloadición [4+2] Diels-Alder',
+    prompt: 'Dibuja el aducto bicíclico formado.',
+    context: 'El furano es el menos aromático de los heterociclos de 5 miembros. Posee un gran carácter de "dieno conjugado" capaz de sufrir reacciones pericíclicas.',
+    reactantSmiles: 'c1ccoc1',
+    reagents: { top: 'Anhídrido Maleico', bottom: 'Calor' },
+    smiles: 'O=C1OC(=O)C2C1C3C=CC2O3',
+    acceptedSmiles: ['O=C1OC(=O)C2C1C3C=CC2O3', 'O1C2C=CC1C1C(=O)OC(=O)C21'],
+    commonMistakes: [
+      { smiles: 'c1cc(C2C(=O)OC(=O)C2)oc1', reason: 'No es una reacción de sustitución aromática. Es una cicloadición [4+2] donde el furano rompe su aromaticidad para ciclar con el alqueno.' }
+    ],
+    explanation: 'El oxígeno puentea la estructura bicíclica formada tras la unión concertada de los 4 carbonos del furano con los 2 del dienófilo, formando un aducto endo/exo altamente tenso.',
+    hints: ['Imagina al furano como un dieno y dibuja el puente de oxígeno (biciclo[2.2.1]).']
+  },
+  {
+    id: 'examen-litiacion-tiofeno',
+    category: 'examen',
+    type: 'reaction',
+    title: 'Litiación Directa (Metalación)',
+    prompt: 'Dibuja el producto intermedio organometálico.',
+    context: 'La posición 2 (alfa) contigua al azufre en el tiofeno tiene un protón con mayor acidez (pKa ~ 33) que el benceno, gracias a efectos inductivos y de coordinación.',
+    reactantSmiles: 'c1ccsc1',
+    reagents: { top: 'n-butil-Li', bottom: 'THF, -78°C' },
+    smiles: '[Li]c1cccs1',
+    acceptedSmiles: ['[Li]c1cccs1', '[Li]C1=CC=CS1'],
+    commonMistakes: [
+      { smiles: 'CCCCc1cccs1', reason: 'El n-BuLi actúa como base aquí (arrancando un protón) y no como nucleófilo. Se forma una especie litiada, no alquilada.' },
+      { smiles: '[Li]c1ccsc1', reason: 'La metalación ocurre selectivamente en C2, no en C3.' }
+    ],
+    explanation: 'El heteroátomo de azufre dirige la litiación hacia la posición adyacente estabilizando el carbanión, formando 2-litiotiofeno, un intermediario sintético crucial.',
+    hints: ['Sustituye un H de la posición 2 por un átomo de Litio [Li].']
+  },
+  {
+    id: 'examen-sulfonacion-furano',
+    category: 'examen',
+    type: 'reaction',
+    title: 'Sulfonación suave',
+    prompt: 'Dibuja el producto regioselectivo.',
+    context: 'Al igual que con el pirrol, el ácido sulfúrico fuerte destruiría el furano. Se emplea el complejo trióxido de azufre-piridina.',
+    reactantSmiles: 'c1ccoc1',
+    reagents: { top: 'SO₃ · Piridina', bottom: 'CH₂Cl₂' },
+    smiles: 'O=S(=O)(O)c1ccco1',
+    acceptedSmiles: ['O=S(=O)(O)c1ccco1', 'OS(=O)(=O)C1=CC=CO1'],
+    commonMistakes: [
+      { smiles: 'O=S(=O)(O)c1ccoc1', reason: 'La regioselectividad domina hacia alfa (C2).' }
+    ],
+    explanation: 'El electrófilo ataca en C2 porque sus formas resonantes del intermediario catiónico son mucho más estables que las formadas por ataque en C3.',
+    hints: ['Agrega el grupo ácido sulfónico (-SO₃H) en el carbono 2.']
+  },
+  {
+    id: 'examen-gattermann-tiofeno',
+    category: 'examen',
+    type: 'reaction',
+    title: 'Reacción de Gattermann',
+    prompt: 'Dibuja el aldehído formado al final del mecanismo.',
+    context: 'Variante de formilación usada clásicamente para anillos ricos en electrones que emplea ácido cianhídrico como bloque formilante.',
+    reactantSmiles: 'c1ccsc1',
+    reagents: { top: '1) HCN, HCl', bottom: '2) H₂O (hidrólisis)' },
+    smiles: 'O=Cc1cccs1',
+    acceptedSmiles: ['O=Cc1cccs1', 'O=CC1=CC=CS1'],
+    commonMistakes: [
+      { smiles: 'N#Cc1cccs1', reason: 'El intermedio es una imina (-CH=NH) que se hidroliza al final para liberar amoníaco y dejar el aldehído.' }
+    ],
+    explanation: 'El ion formimidilo intermedio se adiciona al tiofeno en C2. Tras la hidrólisis acuosa, se revela el grupo funcional final: Tiofeno-2-carbaldehído.',
+    hints: ['El HCN tras hidrolizarse funciona como donador del grupo formilo (-CHO).']
+  },
+  {
+    id: 'examen-fischer-indol',
+    category: 'examen',
+    type: 'reaction',
+    title: 'Síntesis de Fischer del Indol',
+    prompt: 'Dibuja el núcleo indólico final producto del reordenamiento.',
+    context: 'La fenilhidrazona de la acetona, al calentarse con un ácido de Lewis como el ZnCl2, sufre un reordenamiento sigmatrópico [3,3] con pérdida de amoníaco.',
+    reactantSmiles: 'CC(=NNc1ccccc1)C',
+    reagents: { top: 'ZnCl₂', bottom: 'Calor' },
+    smiles: 'Cc1cc2ccccc2[nH]1',
+    acceptedSmiles: ['Cc1cc2ccccc2[nH]1', 'CC1=CC2=CC=CC=C2N1'],
+    commonMistakes: [
+      { smiles: 'c1ccc2[nH]ccc2c1', reason: 'Olvidaste el grupo metilo. La acetona aporta un metilo en la posición 2 del indol resultante.' }
+    ],
+    explanation: 'El mecanismo implica la tautomerización a enamina, un reordenamiento sigmatrópico [3,3] (que rompe el enlace N-N), rearomatización y ciclación final perdiendo NH3.',
+    hints: ['Dibuja un indol con un grupo metilo.', 'El metilo queda en la posición 2.']
+  },
+  {
+    id: 'examen-vilsmeier-indol',
+    category: 'examen',
+    type: 'reaction',
+    title: 'Vilsmeier-Haack en Indol',
+    prompt: 'Dibuja el producto de formilación.',
+    context: 'A diferencia del pirrol (que ataca en C2), el indol prefiere abrumadoramente sufrir el ataque electrofílico en la posición C3 para no romper la aromaticidad del benceno fusionado.',
+    reactantSmiles: 'c1ccc2[nH]ccc2c1',
+    reagents: { top: 'POCl₃ / DMF', bottom: 'H₂O' },
+    smiles: 'O=Cc1c[nH]c2ccccc12',
+    acceptedSmiles: ['O=Cc1c[nH]c2ccccc12', 'O=CC1=CNC2=CC=CC=C12'],
+    commonMistakes: [
+      { smiles: 'O=Cc1cc2ccccc2[nH]1', reason: 'Formilaste en C2. El indol reacciona en C3 para mantener intacto el sexteto aromático del anillo de benceno durante el estado de transición.' }
+    ],
+    explanation: 'El ion clorometileniminio reacciona con el C3 del indol. La hidrólisis genera Indol-3-carbaldehído.',
+    hints: ['Agrega un grupo aldehído (-CHO) en la posición 3.']
+  },
+  {
+    id: 'examen-bromacion-indol',
+    category: 'examen',
+    type: 'reaction',
+    title: 'Bromación suave del Indol',
+    prompt: 'Dibuja el producto monobromado.',
+    context: 'Para evitar poli-halogenaciones y polimerización, el indol se broma en condiciones suaves usando un complejo preformado (dioxano-dibromo) o a muy baja temperatura.',
+    reactantSmiles: 'c1ccc2[nH]ccc2c1',
+    reagents: { top: 'Br₂', bottom: 'Dioxano, 0°C' },
+    smiles: 'Brc1c[nH]c2ccccc12',
+    acceptedSmiles: ['Brc1c[nH]c2ccccc12', 'BrC1=CNC2=CC=CC=C12'],
+    commonMistakes: [
+      { smiles: 'Brc1cc2ccccc2[nH]1', reason: 'La bromación ocurre en C3, no en C2.' }
+    ],
+    explanation: 'El bromo elemental es demasiado reactivo y destructivo; al moderar su reactividad con dioxano a 0°C, se aísla de forma limpia el 3-bromoindol.',
+    hints: ['Sustituye el hidrógeno de la posición 3 por Bromo.']
+  },
+  {
+    id: 'examen-mannich-indol',
+    category: 'examen',
+    type: 'reaction',
+    title: 'Reacción de Mannich (Gramina)',
+    prompt: 'Dibuja el derivado alquilado.',
+    context: 'El indol, al igual que el pirrol, es lo suficientemente reactivo como para atacar a iones iminio en medio ácido, formándose alcaloides vitales.',
+    reactantSmiles: 'c1ccc2[nH]ccc2c1',
+    reagents: { top: 'CH₂O, HN(CH₃)₂', bottom: 'H⁺' },
+    smiles: 'CN(C)Cc1c[nH]c2ccccc12',
+    acceptedSmiles: ['CN(C)Cc1c[nH]c2ccccc12', 'CN(C)CC1=CNC2=CC=CC=C12'],
+    commonMistakes: [
+      { smiles: 'CN(C)Cc1cc2ccccc2[nH]1', reason: 'El ataque ocurrió en C2. Recuerda que el indol siempre reacciona preferentemente en C3.' }
+    ],
+    explanation: 'La reacción del indol con el ion iminio derivado de formaldehído y dimetilamina forma el alcaloide conocido como Gramina (3-((dimetilamino)metil)indol).',
+    hints: ['Agrega el grupo -CH₂-N(CH₃)₂ en la posición 3 del indol.']
+  },
+  {
+    id: 'examen-skraup',
+    category: 'examen',
+    type: 'reaction',
+    title: 'Síntesis de Quinolina de Skraup',
+    prompt: 'Dibuja el heterociclo final de esta mítica reacción.',
+    context: 'La anilina se calienta con glicerol, ácido sulfúrico concentrado y un agente oxidante (nitrobenceno) en una reacción violenta.',
+    reactantSmiles: 'Nc1ccccc1',
+    reagents: { top: 'Glicerol, H₂SO₄', bottom: 'PhNO₂ (Oxidante), Calor' },
+    smiles: 'c1ccc2ncccc2c1',
+    acceptedSmiles: ['c1ccc2ncccc2c1', 'C1=CC=C2N=CC=CC2=C1'],
+    commonMistakes: [
+      { smiles: 'c1ccc2cnccc2c1', reason: 'Dibujaste Isoquinolina. En la síntesis de Skraup a partir de anilina se forma Quinolina (nitrógeno adyacente a la fusión).' }
+    ],
+    explanation: 'El glicerol se deshidrata a acroleína (una enona). La anilina realiza una adición de Michael sobre la acroleína, luego cicla mediante SEAr sobre el anillo bencénico y el oxidante final aromatiza para dar quinolina.',
+    hints: ['Se forma el anillo de Quinolina.', 'La anilina actúa como el anillo bencénico y el nitrógeno de la quinolina.']
+  },
+  {
+    id: 'examen-bischler',
+    category: 'examen',
+    type: 'reaction',
+    title: 'Síntesis de Bischler-Napieralski',
+    prompt: 'Dibuja el producto heteroaromático completamente oxidado.',
+    context: 'La N-fenetilacetamida reacciona con deshidratantes para ciclar, seguida de una deshidrogenación (oxidación catalítica) para restaurar la aromaticidad total.',
+    reactantSmiles: 'CC(=O)NCCc1ccccc1',
+    reagents: { top: '1) POCl₃, Calor', bottom: '2) Pd/C, Calor (Oxidación)' },
+    smiles: 'Cc1nccc2ccccc12',
+    acceptedSmiles: ['Cc1nccc2ccccc12', 'CC1=NC=CC2=CC=CC=C12'],
+    commonMistakes: [
+      { smiles: 'CC1=NCCH2C2=CC=CC=C12', reason: 'Te quedaste en el producto intermedio (3,4-dihidroisoquinolina). El segundo paso con Pd/C oxida aromatizando por completo el anillo.' }
+    ],
+    explanation: 'El POCl3 convierte a la amida en una especie electrofílica que sufre un ataque intramolecular del anillo bencénico. El Pd/C deshidrogena el intermedio formando 1-metilisoquinolina.',
+    hints: ['Forma el anillo de Isoquinolina.', 'Conserva el metilo en la posición 1.']
+  },
+  {
+    id: 'examen-nitracion-quinolina',
+    category: 'examen',
+    type: 'reaction',
+    title: 'Nitración de la Quinolina',
+    prompt: 'Dibuja el isómero 5-nitroquinolina (el producto de la posición alfa respecto a la fusión).',
+    context: 'Al igual que la piridina, el anillo que contiene el nitrógeno está muy desactivado y protonado en medio ácido. Por ende, la SEAr ocurrirá sobre el anillo bencénico (carbocíclico).',
+    reactantSmiles: 'c1ccc2ncccc2c1',
+    reagents: { top: 'HNO₃', bottom: 'H₂SO₄, 0°C' },
+    smiles: 'O=[N+]([O-])c1cccc2ncccc12',
+    acceptedSmiles: ['O=[N+]([O-])c1cccc2ncccc12', 'O=[N+]([O-])C1=C2C=CC=NC2=CC=C1'],
+    commonMistakes: [
+      { smiles: 'O=[N+]([O-])c1cnccc1c2ccccc2', reason: 'El ataque no puede ocurrir sobre el anillo piridínico por estar desactivado.' },
+      { smiles: 'O=[N+]([O-])c1ccc2ncccc2c1', reason: 'Sustituiste en C6. La quinolina se nitra casi a partes iguales en C5 y C8 (las posiciones alfa de la fusión) debido a la mayor estabilidad del complejo sigma sin alterar el otro anillo.' }
+    ],
+    explanation: 'El anillo carbocíclico es atacado por el nitronio. El isómero en C5 (y C8) predominan porque el catión intermedio no altera la estructura de Kekulé del anillo piridínico vecino.',
+    hints: ['Nitra el anillo de benceno.', 'Nitra en la posición 5 (arriba, junto a la fusión).']
+  },
+  {
+    id: 'examen-oxidacion-quinolina',
+    category: 'examen',
+    type: 'reaction',
+    title: 'Oxidación Enérgica de Quinolina',
+    prompt: 'Dibuja el ácido dicarboxílico producto de la ruptura oxidativa.',
+    context: 'Curiosamente, a pesar de que el anillo piridínico está desactivado hacia electrófilos, es EXTREMADAMENTE estable a la oxidación en comparación con el anillo bencénico rico en electrones.',
+    reactantSmiles: 'c1ccc2ncccc2c1',
+    reagents: { top: 'KMnO₄, H₂O', bottom: 'Calor (Reflujo)' },
+    smiles: 'O=C(O)c1c(C(=O)O)cccn1',
+    acceptedSmiles: ['O=C(O)c1c(C(=O)O)cccn1', 'OC(=O)C1=C(N=CC=C1)C(=O)O'],
+    commonMistakes: [
+      { smiles: 'O=C(O)c1cccc2ncccc12', reason: 'La molécula se rompe drásticamente.' },
+      { smiles: 'O=C(O)c1ccccc1', reason: 'El anillo que se destruye por oxidación es el benceno (más rico en densidad electrónica), no la piridina.' }
+    ],
+    explanation: 'Bajo condiciones drásticas con permanganato, el anillo bencénico se rompe por completo oxidando los carbonos puente hasta ácidos carboxílicos, resultando en el ácido quinolínico (ácido piridin-2,3-dicarboxílico).',
+    hints: ['El anillo bencénico es completamente destruido.', 'Los dos carbonos de fusión se oxidan a grupos -COOH adheridos a la piridina.']
+  },
+  {
+    id: 'examen-chichibabin-quinolina',
+    category: 'examen',
+    type: 'reaction',
+    title: 'Aminación de Chichibabin (Quinolina)',
+    prompt: 'Dibuja el producto de la sustitución nucleofílica.',
+    context: 'Similar a la piridina, el nucleófilo fuerte (NH₂⁻) busca la posición más electrodeficiente del sistema heterocíclico.',
+    reactantSmiles: 'c1ccc2ncccc2c1',
+    reagents: { top: 'NaNH₂', bottom: 'Amoníaco líquido, Calor' },
+    smiles: 'Nc1ccc2ccccc2n1',
+    acceptedSmiles: ['Nc1ccc2ccccc2n1', 'NC1=NC2=CC=CC=C2C=C1'],
+    commonMistakes: [
+      { smiles: 'Nc1ccnc2ccccc12', reason: 'Aminaste en la posición 4. El C2 está inmediatamente adyacente al nitrógeno atractor de electrones y es más reactivo.' }
+    ],
+    explanation: 'El amiduro ataca en la posición 2 de la quinolina (entre el nitrógeno y el anillo vecino). Tras la eliminación de hidruro se genera 2-aminoquinolina.',
+    hints: ['Añade un grupo amino (-NH₂) en el carbono 2 (junto al nitrógeno).']
+  },
+  {
+    id: 'examen-snar-pirimidina',
+    category: 'examen',
+    type: 'reaction',
+    title: 'SNAr Regioselectiva',
+    prompt: 'Dibuja el producto monasustituido regioselectivo.',
+    context: 'La 2,4-dicloropirimidina es un reactivo clásico. El carbono 4 y el carbono 2 son altamente electrofílicos, pero uno lo es ligeramente más debido al efecto conjugativo cruzado.',
+    reactantSmiles: 'Clc1ccnc(Cl)n1',
+    reagents: { top: 'NH₃ (1 equivalente)', bottom: 'Etanol, 0°C' },
+    smiles: 'Nc1ccnc(Cl)n1',
+    acceptedSmiles: ['Nc1ccnc(Cl)n1', 'NC1=NC(Cl)=NC=C1'],
+    commonMistakes: [
+      { smiles: 'Nc1cc(Cl)ncn1', reason: 'Ataque incorrecto. La posición 4 es intrínsecamente más reactiva en pirimidinas porque la estabilización de la carga negativa en el intermedio se da eficientemente sobre el N en para.' },
+      { smiles: 'Nc1cc(N)ncn1', reason: 'Usaste solo 1 equivalente a muy baja temperatura, logrando monasustitución regioselectiva.' }
+    ],
+    explanation: 'El ataque del amoníaco ocurre de forma predominante en el carbono 4. El 2,4-dicloropirimidina forma 4-amino-2-cloropirimidina, preservando el cloro en posición 2.',
+    hints: ['Sustituye el cloro de la posición 4.', 'Deja intacto el cloro de la posición 2.']
+  },
+  {
+    id: 'examen-barbiturico',
+    category: 'examen',
+    type: 'reaction',
+    title: 'Síntesis del Ácido Barbitúrico',
+    prompt: 'Dibuja el esqueleto central cíclico formado por esta condensación.',
+    context: 'El malonato de dietilo reacciona como di-éster electrófilo ante la urea (un di-nucleófilo débil) en presencia de etóxido de sodio.',
+    reactantSmiles: 'NC(=O)N',
+    reagents: { top: 'Malonato de dietilo', bottom: 'NaOEt, Etanol (Calor)' },
+    smiles: 'O=C1CC(=O)NC(=O)N1',
+    acceptedSmiles: ['O=C1CC(=O)NC(=O)N1', 'O=C1CC(=O)NC(=O)N1'],
+    commonMistakes: [
+      { smiles: 'NC(=O)N(CC(=O)O)CC(=O)O', reason: 'Debes formar un heterociclo de 6 miembros.' }
+    ],
+    explanation: 'Cada grupo amino de la urea ataca a un éster etílico del malonato (reacción de transamidación/condensación), cerrando un anillo de pirimidintriona (ácido barbitúrico).',
+    hints: ['Dibuja un anillo de pirimidina saturada.', 'Pon grupos carbonilo (=O) en las posiciones 2, 4 y 6.']
+  },
+  {
+    id: 'examen-nitracion-uracilo',
+    category: 'examen',
+    type: 'reaction',
+    title: 'Nitración de Bases Nitrogenadas (Uracilo)',
+    prompt: 'Dibuja el uracilo nitrado resultante.',
+    context: 'A diferencia de la pirimidina desnuda (imposible de nitrar), el uracilo posee grupos lactámicos que enriquecen al anillo (vía tautomeros enólicos), activando la posición 5.',
+    reactantSmiles: 'O=c1cc[nH]c(=O)[nH]1',
+    reagents: { top: 'HNO₃, H₂SO₄', bottom: 'Calor' },
+    smiles: 'O=[N+]([O-])c1c[nH]c(=O)[nH]c1=O',
+    acceptedSmiles: ['O=[N+]([O-])c1c[nH]c(=O)[nH]c1=O', 'O=[N+]([O-])C1=CNC(=O)NC1=O'],
+    commonMistakes: [
+      { smiles: 'O=[N+]([O-])n1ccc(=O)[nH]c1=O', reason: 'La nitración es una SEAr que ataca el carbono 5, no el nitrógeno.' }
+    ],
+    explanation: 'El uracilo se nitra fácilmente en C5 porque es la única posición vinílica disponible y activada por los grupos que la rodean, formando 5-nitrouracilo.',
+    hints: ['Nitra el carbono 5 (el carbono que tiene el doble enlace y no está junto a los O).']
+  },
+  {
+    id: 'examen-alquilacion-purina',
+    category: 'examen',
+    type: 'reaction',
+    title: 'Alquilación de Adenina',
+    prompt: 'Dibuja el alquilado principal.',
+    context: 'La adenina es una base púrica (unión de pirimidina e imidazol). De todos los nitrógenos presentes (¡cinco!), hay uno que destaca por ser el más nucleofílico/ácido.',
+    reactantSmiles: 'Nc1ncnc2[nH]cnc12',
+    reagents: { top: 'CH₃I', bottom: 'K₂CO₃, DMF' },
+    smiles: 'Cn1cnc2c(N)ncnc12',
+    acceptedSmiles: ['Cn1cnc2c(N)ncnc12', 'CN1C=NC2=C(N)N=CN=C12'],
+    commonMistakes: [
+      { smiles: 'CNc1ncnc2[nH]cnc12', reason: 'Alquilaste el grupo exocíclico -NH2. El nitrógeno más nucleofílico en el sistema aniónico reside en el anillo imidazólico (N9).' }
+    ],
+    explanation: 'Bajo condiciones básicas débiles, la adenina es desprotonada formando su anión, cuya carga reside mayormente en el N9 (imidazol), el cual ataca al CH3I, análogo a los enlaces biológicos N-glicosídicos en el ADN.',
+    hints: ['Añade un grupo metilo (-CH₃) al nitrógeno del anillo de 5 miembros.']
+  },
+  {
+    id: 'examen-sandmeyer',
+    category: 'examen',
+    type: 'reaction',
+    title: 'Reacción de Sandmeyer',
+    prompt: 'Dibuja el producto aromático funcionalizado.',
+    context: 'Una de las formas más eficientes de sustituir carbonos en aromáticos. Se forma primero una sal de diazonio in situ a 0°C a partir de la anilina.',
+    reactantSmiles: 'Nc1ccccc1',
+    reagents: { top: '1) NaNO₂, HCl, 0°C', bottom: '2) CuCl, Calor' },
+    smiles: 'Clc1ccccc1',
+    acceptedSmiles: ['Clc1ccccc1', 'ClC1=CC=CC=C1'],
+    commonMistakes: [
+      { smiles: 'N#N[Cl-]', reason: 'Esta es la sal de diazonio intermedia que se forma a 0°C. Al calentar con CuCl (paso 2) se expulsa N2 gaseoso dando el producto final.' }
+    ],
+    explanation: 'El ácido nitroso (formado por NaNO2 + HCl) diazotiza a la amina formando cloruro de bencenodiazonio. En presencia de sales cuprosas (CuCl), un radical Cl sustituye al grupo diazonio perdiendo gas nitrógeno (Sandmeyer).',
+    hints: ['Sustituye todo el grupo amino (-NH₂) por un átomo de Cloro.']
   }
 ];
 

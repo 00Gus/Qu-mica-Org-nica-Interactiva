@@ -227,7 +227,34 @@
     $('problemType').textContent = typeLabel;
     $('problemTitle').textContent = problem.title;
     $('problemPrompt').innerHTML = problem.prompt;
+
+    // Soporte visual avanzado para Nivel Universitario
+    if (problem.type === 'reaction' && problem.reactantSmiles && problem.reagents && typeof OCL !== 'undefined') {
+      try {
+        const mol = OCL.Molecule.fromSmiles(problem.reactantSmiles);
+        const svgStr = mol.toSVG(130, 130, "reactant-svg", { autoCrop: true, suppressChiralText: true });
+        const reagentTop = problem.reagents.top || '';
+        const reagentBottom = problem.reagents.bottom || '';
+        
+        const graphicHtml = `
+          <div class="reaction-graphic-container">
+            <div class="reaction-reactant">${svgStr}</div>
+            <div class="reaction-arrow-container">
+              <div class="reagent-top">${reagentTop}</div>
+              <div class="reaction-arrow"></div>
+              <div class="reagent-bottom">${reagentBottom}</div>
+            </div>
+            <div class="reaction-product-box">?</div>
+          </div>
+        `;
+        $('problemPrompt').innerHTML += graphicHtml;
+      } catch (e) {
+        console.warn("No se pudo renderizar el SVG reactivo", e);
+      }
+    }
+
     $('problemContext').textContent = problem.context || '';
+    $('contextDetails').open = !!problem.context;
 
     const attemptBadge = $('attemptBadge');
     if (attemptCount > 0) {
